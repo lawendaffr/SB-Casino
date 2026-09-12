@@ -10,6 +10,6 @@ spring:
 jwt:
   secret: ${JWT_SECRET:change-this-secret-key-to-a-long-random-value-123456789}
   expiration-ms: 900000
-logging:
-  level:
-    org.springframework.security: TRACE
+#logging:
+#  level:
+#    org.springframework.security: TRACE
