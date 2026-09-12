@@ -1,6 +1,8 @@
 package me.polonium.kasynobackend.auth;
 
 
+import me.polonium.kasynobackend.auth.dto.AuthResponse;
+import me.polonium.kasynobackend.auth.dto.LoginRequest;
 import me.polonium.kasynobackend.auth.dto.RegisterRequest;
 import me.polonium.kasynobackend.auth.dto.UserResponse;
 import org.springframework.http.HttpStatus;
@@ -21,5 +23,9 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse register(@RequestBody RegisterRequest request) {
         return authService.register(request);
+    }
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 }
