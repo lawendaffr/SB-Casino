@@ -5,6 +5,7 @@ import me.polonium.kasynobackend.auth.dto.LoginRequest;
 import me.polonium.kasynobackend.auth.dto.RegisterRequest;
 import me.polonium.kasynobackend.auth.dto.UserResponse;
 import me.polonium.kasynobackend.entity.User;
+import me.polonium.kasynobackend.entity.UserRole;
 import me.polonium.kasynobackend.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,6 +38,8 @@ public class AuthService {
         user.setUsername(request.username());
         user.setPasswordHash(passwordEncoder.encode(request.password()));
         user.setBalance(1000);
+        user.setRole(UserRole.USER);
+
         User savedUser = userRepository.save(user);
 
         return new UserResponse(
