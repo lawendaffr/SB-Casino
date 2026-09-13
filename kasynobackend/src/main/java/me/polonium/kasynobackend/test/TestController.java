@@ -1,4 +1,4 @@
-package me.polonium.kasynobackend.controller;
+package me.polonium.kasynobackend.test;
 
 import me.polonium.kasynobackend.entity.User;
 import me.polonium.kasynobackend.repository.UserRepository;

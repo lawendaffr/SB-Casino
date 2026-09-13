@@ -1,0 +1,1 @@
+CREATE DATABASE casino_test;

@@ -7,3 +7,9 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: false
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-ms: 900000
+#logging:
+#  level:
+#    org.springframework.security: TRACE
