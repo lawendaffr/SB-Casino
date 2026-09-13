@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/casino_test
+    username: casino
+    password: change-me
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+
+jwt:
+  secret: test-secret-test-secret-test-secret-test-secret
+  expiration-ms: 900000
