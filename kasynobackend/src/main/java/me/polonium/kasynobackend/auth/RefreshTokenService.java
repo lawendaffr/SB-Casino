@@ -1,10 +1,13 @@
 package me.polonium.kasynobackend.auth;
 
 import jakarta.transaction.Transactional;
+import me.polonium.kasynobackend.auth.dto.RefreshResult;
 import me.polonium.kasynobackend.entity.RefreshToken;
 import me.polonium.kasynobackend.entity.User;
 import me.polonium.kasynobackend.repository.RefreshTokenRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -76,5 +79,37 @@ public class RefreshTokenService {
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    @Transactional
+    public RefreshResult rotate(String rawToken) {
+        RefreshToken refreshToken = refreshTokenRepository
+                .findByTokenHash(hash(rawToken))
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.UNAUTHORIZED,
+                                "Invalid refresh token"
+                        )
+                );
+
+        if (refreshToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+            refreshTokenRepository.delete(refreshToken);
+
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Refresh token has expired"
+            );
+        }
+
+        User user = refreshToken.getUser();
+
+        refreshTokenRepository.delete(refreshToken);
+
+        String newRefreshToken = create(user);
+
+        return new RefreshResult(
+                user,
+                newRefreshToken
+        );
     }
 }

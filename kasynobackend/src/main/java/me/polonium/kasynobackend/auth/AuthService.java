@@ -5,6 +5,7 @@ import me.polonium.kasynobackend.auth.dto.AuthResponse;
 import me.polonium.kasynobackend.auth.dto.LoginRequest;
 import me.polonium.kasynobackend.auth.dto.RegisterRequest;
 import me.polonium.kasynobackend.auth.dto.UserResponse;
+import me.polonium.kasynobackend.auth.dto.RefreshResult;
 import me.polonium.kasynobackend.entity.User;
 import me.polonium.kasynobackend.entity.UserRole;
 import me.polonium.kasynobackend.repository.UserRepository;
@@ -74,14 +75,25 @@ public class AuthService {
         String refreshToken = refreshTokenService.create(user);
         return new AuthResponse(accessToken ,refreshToken);
     }
+
     @Transactional
     public AuthResponse refresh(String rawRefreshToken) {
-        User user = refreshTokenService.validate(rawRefreshToken);
+        RefreshResult result =
+                refreshTokenService.rotate(rawRefreshToken);
+
+        User user = result.user();
 
         String accessToken = jwtService.generateToken(
                 user.getId(),
                 user.getUsername()
         );
-        return new AuthResponse(accessToken,rawRefreshToken);
+
+        return new AuthResponse(
+                accessToken,
+                result.refreshToken()
+        );
+    }
+    public void logout(String rawRefreshToken) {
+        refreshTokenService.delete(rawRefreshToken);
     }
 }
