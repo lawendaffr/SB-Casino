@@ -1,10 +1,7 @@
 package me.polonium.kasynobackend.auth;
 
 
-import me.polonium.kasynobackend.auth.dto.AuthResponse;
-import me.polonium.kasynobackend.auth.dto.LoginRequest;
-import me.polonium.kasynobackend.auth.dto.RegisterRequest;
-import me.polonium.kasynobackend.auth.dto.UserResponse;
+import me.polonium.kasynobackend.auth.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,5 +24,9 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+    @PostMapping("/refresh")
+    public AuthResponse refresh(@RequestBody RefreshRequest request) {
+        return authService.refresh(request.refreshToken());
     }
 }

@@ -1,5 +1,6 @@
 package me.polonium.kasynobackend.auth;
 
+import jakarta.transaction.Transactional;
 import me.polonium.kasynobackend.auth.dto.AuthResponse;
 import me.polonium.kasynobackend.auth.dto.LoginRequest;
 import me.polonium.kasynobackend.auth.dto.RegisterRequest;
@@ -18,11 +19,13 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, RefreshTokenService refreshTokenService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
     }
 
     public UserResponse register(RegisterRequest request) {
@@ -64,10 +67,21 @@ public class AuthService {
                     "Invalid username or password"
             );
         }
-        String token = jwtService.generateToken(
+        String accessToken = jwtService.generateToken(
                 user.getId(),
                 user.getUsername()
         );
-        return new AuthResponse(token);
+        String refreshToken = refreshTokenService.create(user);
+        return new AuthResponse(accessToken ,refreshToken);
+    }
+    @Transactional
+    public AuthResponse refresh(String rawRefreshToken) {
+        User user = refreshTokenService.validate(rawRefreshToken);
+
+        String accessToken = jwtService.generateToken(
+                user.getId(),
+                user.getUsername()
+        );
+        return new AuthResponse(accessToken,rawRefreshToken);
     }
 }
