@@ -1,0 +1,226 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Diagram przypadków użycia" id="0">
+    <mxGraphModel dx="1814" dy="978" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="system" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=none;verticalAlign=top;align=center;fontStyle=1;fontSize=18;" value="System kasyna" vertex="1">
+          <mxGeometry height="900" width="1100" x="250" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="account" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Zarządzać kontem" vertex="1">
+          <mxGeometry height="70" width="210" x="70" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="balance" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Zarządzać saldem" vertex="1">
+          <mxGeometry height="70" width="210" x="330" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="games" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Korzystać z gier" vertex="1">
+          <mxGeometry height="70" width="210" x="590" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="social" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Korzystać z funkcji społecznościowych" vertex="1">
+          <mxGeometry height="70" width="230" x="850" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="register" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarejestrować konto" vertex="1">
+          <mxGeometry height="60" width="190" x="40" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="login" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zalogować się" vertex="1">
+          <mxGeometry height="60" width="190" x="40" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="logout" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wylogować się" vertex="1">
+          <mxGeometry height="60" width="190" x="40" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="profile" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać profilem" vertex="1">
+          <mxGeometry height="60" width="190" x="40" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="delete" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Usunąć konto" vertex="1">
+          <mxGeometry height="60" width="190" x="40" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="viewBalance" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Sprawdzić saldo" vertex="1">
+          <mxGeometry height="60" width="190" x="300" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="voucher" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zrealizować kod waluty" vertex="1">
+          <mxGeometry height="60" width="210" x="290" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="history" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić historię transakcji" vertex="1">
+          <mxGeometry height="60" width="230" x="280" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="slots" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Sloty" vertex="1">
+          <mxGeometry height="60" width="190" x="570" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="mines" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Miny" vertex="1">
+          <mxGeometry height="60" width="190" x="570" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="plinko" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Plinko" vertex="1">
+          <mxGeometry height="60" width="190" x="570" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="blackjack" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Blackjacka" vertex="1">
+          <mxGeometry height="60" width="210" x="560" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="roulette" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Ruletkę" vertex="1">
+          <mxGeometry height="60" width="200" x="570" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="leaderboard" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić ranking" vertex="1">
+          <mxGeometry height="60" width="200" x="840" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="stats" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić statystyki" vertex="1">
+          <mxGeometry height="60" width="210" x="835" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="gameHistory" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić historię gier" vertex="1">
+          <mxGeometry height="60" width="220" x="825" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="report" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zgłosić użytkownika" vertex="1">
+          <mxGeometry height="60" width="210" x="830" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="moderation" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Moderować użytkowników" vertex="1">
+          <mxGeometry height="70" width="230" x="180" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="searchUsers" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyszukać użytkownika" vertex="1">
+          <mxGeometry height="60" width="210" x="30" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="warn" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Ostrzec użytkownika" vertex="1">
+          <mxGeometry height="60" width="200" x="260" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="suspend" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zawiesić użytkownika" vertex="1">
+          <mxGeometry height="60" width="210" x="480" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="ban" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zablokować użytkownika" vertex="1">
+          <mxGeometry height="60" width="210" x="710" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="administration" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Zarządzać systemem" vertex="1">
+          <mxGeometry height="70" width="220" x="850" y="615" as="geometry" />
+        </mxCell>
+        <mxCell id="manageRoles" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać rolami" vertex="1">
+          <mxGeometry height="60" width="180" x="930" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="manageUsers" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać użytkownikami" vertex="1">
+          <mxGeometry height="60" width="210" x="1120" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="manageGames" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać grami" vertex="1">
+          <mxGeometry height="60" width="180" x="1110" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="manageVouchers" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać kodami waluty" vertex="1">
+          <mxGeometry height="60" width="210" x="1080" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="manageTransactions" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać transakcjami" vertex="1">
+          <mxGeometry height="60" width="210" x="1080" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Przeglądać dziennik audytowy" vertex="1">
+          <mxGeometry height="60" width="230" x="1060" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="system" source="account" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="register" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="system" source="account" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="login" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="system" source="account" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="logout" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="system" source="account" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="profile" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="system" source="delete" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="profile" value="&lt;&lt;extend&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" edge="1" parent="system" source="balance" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="viewBalance" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" edge="1" parent="system" source="balance" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="voucher" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" edge="1" parent="system" source="balance" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="history" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" edge="1" parent="system" source="games" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="slots" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" edge="1" parent="system" source="games" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="mines" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" edge="1" parent="system" source="games" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="plinko" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" edge="1" parent="system" source="games" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="blackjack" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g5" edge="1" parent="system" source="games" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="roulette" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" edge="1" parent="system" source="social" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="leaderboard" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" edge="1" parent="system" source="social" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="stats" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" edge="1" parent="system" source="social" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="gameHistory" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" edge="1" parent="system" source="report" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="social" value="&lt;&lt;extend&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" edge="1" parent="system" source="moderation" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="searchUsers" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" edge="1" parent="system" source="moderation" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="warn" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" edge="1" parent="system" source="moderation" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="suspend" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" edge="1" parent="system" source="moderation" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="ban" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ad1" edge="1" parent="system" source="administration" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="manageRoles" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ad2" edge="1" parent="system" source="administration" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="manageUsers" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ad3" edge="1" parent="system" source="administration" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="manageGames" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ad4" edge="1" parent="system" source="administration" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="manageVouchers" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ad5" edge="1" parent="system" source="administration" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="manageTransactions" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ad6" edge="1" parent="system" source="administration" style="dashed=1;endArrow=open;html=1;fontSize=11;" target="audit" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Użytkownik" vertex="1">
+          <mxGeometry height="120" width="80" x="70" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="moderator" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Moderator" vertex="1">
+          <mxGeometry height="120" width="80" x="70" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Administrator" vertex="1">
+          <mxGeometry height="120" width="80" x="1390" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="endArrow=none;html=1;" target="account">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="user" style="endArrow=none;html=1;" target="balance">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="user" style="endArrow=none;html=1;" target="games">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="user" style="endArrow=none;html=1;" target="social">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="moderator" style="endArrow=none;html=1;" target="moderation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="admin" style="endArrow=none;html=1;" target="administration">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gen1" edge="1" parent="1" source="moderator" style="endArrow=block;endFill=0;html=1;" target="user">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gen2" edge="1" parent="1" source="admin" style="endArrow=block;endFill=0;html=1;" target="moderator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
