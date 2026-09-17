@@ -1,0 +1,269 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="kasyno-grouped-class-diagram" name="Class Diagram">
+    <mxGraphModel dx="1773" dy="2113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="frontendGroup" parent="1" style="swimlane;html=1;rounded=1;horizontal=1;startSize=35;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;" value="FRONTEND" vertex="1">
+          <mxGeometry height="1080" width="520" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ApiClient" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;ApiClient&lt;/b&gt;&lt;hr&gt;- baseUrl: String&lt;br&gt;- token: String&lt;hr&gt;+ get(): Response&lt;br&gt;+ post(): Response&lt;br&gt;+ put(): Response&lt;br&gt;+ delete(): Response&lt;br&gt;+ setToken(): void" vertex="1">
+          <mxGeometry height="180" width="210" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AuthManager" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;AuthManager&lt;/b&gt;&lt;hr&gt;- api: ApiClient&lt;br&gt;- accessToken: String&lt;br&gt;- refreshToken: String&lt;hr&gt;+ login(): void&lt;br&gt;+ register(): void&lt;br&gt;+ logout(): void&lt;br&gt;+ refresh(): void" vertex="1">
+          <mxGeometry height="180" width="210" x="280" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PageController" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;PageController&lt;/b&gt;&lt;hr&gt;- currentPage: String&lt;hr&gt;+ showLogin(): void&lt;br&gt;+ showRegister(): void&lt;br&gt;+ showProfile(): void&lt;br&gt;+ showHome(): void&lt;br&gt;+ navigate(): void" vertex="1">
+          <mxGeometry height="170" width="210" x="30" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="GameControllerFrontend" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;GameController&lt;/b&gt;&lt;hr&gt;- api: ApiClient&lt;br&gt;- currentGame: String&lt;hr&gt;+ startGame(): void&lt;br&gt;+ submitGame(): void&lt;br&gt;+ getBalance(): void&lt;br&gt;+ getHistory(): void" vertex="1">
+          <mxGeometry height="170" width="210" x="280" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="SlotGameView" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;SlotGameView&lt;/b&gt;&lt;hr&gt;- controller: GameController&lt;hr&gt;+ spin(): void&lt;br&gt;+ displayResult(): void" vertex="1">
+          <mxGeometry height="140" width="210" x="30" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="ProfileView" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;ProfileView&lt;/b&gt;&lt;hr&gt;- auth: AuthManager&lt;hr&gt;+ displayProfile(): void&lt;br&gt;+ deleteAccount(): void&lt;br&gt;+ logout(): void" vertex="1">
+          <mxGeometry height="140" width="210" x="280" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="FrontendDTO" parent="frontendGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;DTOs&lt;/b&gt;&lt;hr&gt;UserDTO&lt;br&gt;LoginRequest&lt;br&gt;RegisterRequest&lt;br&gt;AuthResponse&lt;br&gt;GameResultDTO" vertex="1">
+          <mxGeometry height="150" width="230" x="145" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_auth_api" edge="1" parent="1" source="AuthManager" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="ApiClient" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_game_api" edge="1" parent="1" source="GameControllerFrontend" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="ApiClient" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_page_auth" edge="1" parent="1" source="PageController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="AuthManager" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_slot_game" edge="1" parent="1" source="SlotGameView" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="GameControllerFrontend" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_profile_auth" edge="1" parent="1" source="ProfileView" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="AuthManager" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="userGroup" parent="1" style="swimlane;html=1;rounded=1;horizontal=1;startSize=35;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;" value="USER / ACCOUNT" vertex="1">
+          <mxGeometry height="520" width="520" x="620" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UserController" parent="userGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;UserController&lt;/b&gt;&lt;hr&gt;- userService: UserService&lt;hr&gt;+ getProfile(): UserDTO&lt;br&gt;+ updateProfile(): UserDTO&lt;br&gt;+ deleteAccount(): void&lt;br&gt;+ history(): List" vertex="1">
+          <mxGeometry height="175" width="220" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UserService" parent="userGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;UserService&lt;/b&gt;&lt;hr&gt;- userRepository: UserRepository&lt;hr&gt;+ getProfile(): User&lt;br&gt;+ updateProfile(): User&lt;br&gt;+ deleteUser(): void&lt;br&gt;+ getHistory(): List" vertex="1">
+          <mxGeometry height="175" width="220" x="270" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="User" parent="userGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;User&lt;/b&gt;&lt;hr&gt;- id: Long&lt;br&gt;- username: String&lt;br&gt;- email: String&lt;br&gt;- passwordHash: String&lt;br&gt;- balance: BigDecimal&lt;br&gt;- role: UserRole&lt;hr&gt;+ getBalance(): BigDecimal&lt;br&gt;+ addBalance(): void&lt;br&gt;+ subtractBalance(): void" vertex="1">
+          <mxGeometry height="200" width="220" x="30" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="UserRole" parent="userGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;&lt;enumeration&gt;&gt;&lt;br&gt;&lt;b&gt;UserRole&lt;/b&gt;&lt;hr&gt;USER&lt;br&gt;MODERATOR&lt;br&gt;ADMIN" vertex="1">
+          <mxGeometry height="135" width="220" x="270" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="UserRepository" parent="userGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;&lt;interface&gt;&gt;&lt;br&gt;&lt;b&gt;UserRepository&lt;/b&gt;&lt;hr&gt;+ findByUsername(): Optional&lt;br&gt;+ findByEmail(): Optional&lt;br&gt;+ save(): User&lt;br&gt;+ delete(): void" vertex="1">
+          <mxGeometry height="145" width="220" x="270" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_us" edge="1" parent="1" source="UserController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="UserService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="us_ur" edge="1" parent="1" source="UserService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="UserRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ur_user" edge="1" parent="1" source="UserRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=none;startArrow=none;strokeColor=#000000;" target="User" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user_role" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=none;startArrow=none;strokeColor=#000000;" target="UserRole" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="authGroup" parent="1" style="swimlane;html=1;rounded=1;horizontal=1;startSize=35;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;" value="AUTHENTICATION" vertex="1">
+          <mxGeometry height="750" width="910" x="1520" y="-200" as="geometry" />
+        </mxCell>
+        <mxCell id="AuthController" parent="authGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;AuthController&lt;/b&gt;&lt;hr&gt;- authService: AuthService&lt;hr&gt;+ register(): AuthResponse&lt;br&gt;+ login(): AuthResponse&lt;br&gt;+ refresh(): AuthResponse&lt;br&gt;+ logout(): void" vertex="1">
+          <mxGeometry height="180" width="240" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AuthService" parent="authGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;AuthService&lt;/b&gt;&lt;hr&gt;- userRepository: UserRepository&lt;br&gt;- jwtService: JwtService&lt;br&gt;- passwordEncoder: PasswordEncoder&lt;hr&gt;+ register(): AuthResponse&lt;br&gt;+ login(): AuthResponse&lt;br&gt;+ refresh(): AuthResponse" vertex="1">
+          <mxGeometry height="195" width="240" x="300" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RefreshTokenService" parent="authGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;RefreshTokenService&lt;/b&gt;&lt;hr&gt;- repository: RefreshTokenRepository&lt;hr&gt;+ create(): RefreshToken&lt;br&gt;+ verify(): RefreshToken&lt;br&gt;+ revoke(): void" vertex="1">
+          <mxGeometry height="155" width="240" x="30" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="RefreshToken" parent="authGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;RefreshToken&lt;/b&gt;&lt;hr&gt;- id: Long&lt;br&gt;- token: String&lt;br&gt;- expiryDate: Instant&lt;br&gt;- revoked: boolean&lt;hr&gt;+ isExpired(): boolean&lt;br&gt;+ revoke(): void" vertex="1">
+          <mxGeometry height="175" width="240" x="630" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="RefreshTokenRepository" parent="authGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;&lt;interface&gt;&gt;&lt;br&gt;&lt;b&gt;RefreshTokenRepository&lt;/b&gt;&lt;hr&gt;+ findByToken(): Optional&lt;br&gt;+ save(): RefreshToken&lt;br&gt;+ delete(): void" vertex="1">
+          <mxGeometry height="150" width="240" x="600" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="ac_as" edge="1" parent="1" source="AuthController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="AuthService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="as_rts" edge="1" parent="1" source="AuthService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="RefreshTokenService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rts_rtr" edge="1" parent="1" source="RefreshTokenService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="RefreshTokenRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rtr_rt" edge="1" parent="1" source="RefreshTokenRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=none;startArrow=none;strokeColor=#000000;" target="RefreshToken" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="securityGroup" parent="1" style="swimlane;html=1;rounded=1;horizontal=1;startSize=35;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;" value="JWT / SECURITY" vertex="1">
+          <mxGeometry height="470" width="520" x="620" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="JwtService" parent="securityGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;JwtService&lt;/b&gt;&lt;hr&gt;- secretKey: String&lt;br&gt;- expiration: long&lt;hr&gt;+ generateToken(): String&lt;br&gt;+ validateToken(): boolean&lt;br&gt;+ getUsername(): String" vertex="1">
+          <mxGeometry height="165" width="220" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JwtAuthenticationFilter" parent="securityGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;JwtAuthenticationFilter&lt;/b&gt;&lt;hr&gt;- jwtService: JwtService&lt;br&gt;- userDetailsService: DatabaseUserDetailsService&lt;hr&gt;+ doFilterInternal(): void" vertex="1">
+          <mxGeometry height="175" width="210" x="280" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SecurityConfig" parent="securityGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;SecurityConfig&lt;/b&gt;&lt;hr&gt;- filter: JwtAuthenticationFilter&lt;hr&gt;+ securityFilterChain(): SecurityFilterChain&lt;br&gt;+ passwordEncoder(): PasswordEncoder" vertex="1">
+          <mxGeometry height="160" width="220" x="30" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="DatabaseUserDetailsService" parent="securityGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;DatabaseUserDetailsService&lt;/b&gt;&lt;hr&gt;- userRepository: UserRepository&lt;hr&gt;+ loadUserByUsername(): UserDetails" vertex="1">
+          <mxGeometry height="140" width="210" x="280" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="UserDetails" parent="securityGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;&lt;interface&gt;&gt;&lt;br&gt;&lt;b&gt;UserDetails&lt;/b&gt;&lt;hr&gt;+ getAuthorities(): Collection&lt;br&gt;+ getUsername(): String&lt;br&gt;+ isEnabled(): boolean" vertex="1">
+          <mxGeometry height="130" width="230" x="145" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="PasswordEncoder" parent="securityGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;&lt;interface&gt;&gt;&lt;br&gt;&lt;b&gt;PasswordEncoder&lt;/b&gt;&lt;hr&gt;+ encode(): String&lt;br&gt;+ matches(): boolean" vertex="1">
+          <mxGeometry height="115" width="220" x="30" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="jwt_filter" edge="1" parent="1" source="JwtAuthenticationFilter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="JwtService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="security_filter" edge="1" parent="1" source="SecurityConfig" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="JwtAuthenticationFilter" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="filter_details" edge="1" parent="1" source="JwtAuthenticationFilter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="DatabaseUserDetailsService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="details_interface" edge="1" parent="1" source="DatabaseUserDetailsService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=block;endFill=0;strokeColor=#000000;" target="UserDetails" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gamesGroup" parent="1" style="swimlane;html=1;rounded=1;horizontal=1;startSize=35;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;" value="GAMES" vertex="1">
+          <mxGeometry height="470" width="570" x="1920" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="GameControllerBackend" parent="gamesGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;GameController&lt;/b&gt;&lt;hr&gt;- gameService: GameService&lt;hr&gt;+ play(): GameResultDTO&lt;br&gt;+ history(): List&lt;br&gt;+ statistics(): StatisticsDTO" vertex="1">
+          <mxGeometry height="170" width="240" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GameService" parent="gamesGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;GameService&lt;/b&gt;&lt;hr&gt;- gameRepository: GameRepository&lt;br&gt;- userRepository: UserRepository&lt;hr&gt;+ play(): GameResult&lt;br&gt;+ getHistory(): List&lt;br&gt;+ getStatistics(): StatisticsDTO" vertex="1">
+          <mxGeometry height="180" width="240" x="300" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GameResult" parent="gamesGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;GameResult&lt;/b&gt;&lt;hr&gt;- id: Long&lt;br&gt;- gameType: String&lt;br&gt;- stake: BigDecimal&lt;br&gt;- reward: BigDecimal&lt;br&gt;- createdAt: Instant&lt;hr&gt;+ calculateProfit(): BigDecimal" vertex="1">
+          <mxGeometry height="175" width="240" x="30" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="GameRepository" parent="gamesGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;&lt;interface&gt;&gt;&lt;br&gt;&lt;b&gt;GameRepository&lt;/b&gt;&lt;hr&gt;+ findByUser(): List&lt;br&gt;+ save(): GameResult&lt;br&gt;+ findRecent(): List" vertex="1">
+          <mxGeometry height="150" width="240" x="300" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="gc_gs" edge="1" parent="1" source="GameControllerBackend" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="GameService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gs_gr" edge="1" parent="1" source="GameService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="GameRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gr_repo" edge="1" parent="1" source="GameRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=none;startArrow=none;strokeColor=#000000;" target="GameResult" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adminGroup" parent="1" style="swimlane;html=1;rounded=1;horizontal=1;startSize=35;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;" value="ADMINISTRATION" vertex="1">
+          <mxGeometry height="300" width="570" x="960" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="AdminController" parent="adminGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;AdminController&lt;/b&gt;&lt;hr&gt;- adminService: AdminService&lt;hr&gt;+ warnUser(): void&lt;br&gt;+ suspendUser(): void&lt;br&gt;+ banUser(): void&lt;br&gt;+ getReports(): List" vertex="1">
+          <mxGeometry height="180" width="240" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AdminService" parent="adminGroup" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" value="&lt;b&gt;AdminService&lt;/b&gt;&lt;hr&gt;- userRepository: UserRepository&lt;hr&gt;+ warn(): void&lt;br&gt;+ suspend(): void&lt;br&gt;+ ban(): void&lt;br&gt;+ reports(): List" vertex="1">
+          <mxGeometry height="165" width="240" x="300" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_controller_service" edge="1" parent="1" source="AdminController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=open;endFill=0;strokeColor=#000000;" target="AdminService" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="auth_userrepo" edge="1" parent="1" source="AuthService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="UserRepository" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1490" y="285" />
+              <mxPoint x="1100" y="285" />
+              <mxPoint x="1100" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="auth_jwt" edge="1" parent="1" source="AuthService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="JwtService" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1510" y="280" />
+              <mxPoint x="1510" y="610" />
+              <mxPoint x="900" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="auth_password" edge="1" parent="1" source="AuthService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="PasswordEncoder" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1530" y="300" />
+              <mxPoint x="1530" y="600" />
+              <mxPoint x="770" y="600" />
+              <mxPoint x="770" y="1115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="details_userrepo" edge="1" parent="1" source="DatabaseUserDetailsService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="UserRepository" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1030" y="1000" />
+              <mxPoint x="1030" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="game_userrepo" edge="1" parent="1" source="GameService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;endArrow=open;endFill=0;strokeColor=#000000;" target="UserRepository" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1520" y="910" />
+              <mxPoint x="1520" y="570" />
+              <mxPoint x="1120" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user_game" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;endArrow=none;startArrow=none;strokeColor=#000000;" target="GameResult" value="0..*">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="600" />
+              <mxPoint x="1310" y="600" />
+              <mxPoint x="1310" y="940" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user_refresh" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;startArrow=diamond;startFill=1;endArrow=none;strokeColor=#000000;" target="RefreshToken" value="0..*">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="580" />
+              <mxPoint x="1500" y="580" />
+              <mxPoint x="1500" y="425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rest_auth" edge="1" parent="1" source="AuthManager" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;strokeWidth=2;endArrow=block;endFill=0;strokeColor=#000000;fontColor=#000000;" target="AuthController" value="REST / JSON">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="170" />
+              <mxPoint x="590" y="150" />
+              <mxPoint x="1220" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rest_user" edge="1" parent="1" source="PageController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;strokeWidth=2;endArrow=block;endFill=0;strokeColor=#000000;fontColor=#000000;" target="UserController" value="REST / JSON">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="390" />
+              <mxPoint x="590" y="160" />
+              <mxPoint x="650" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rest_game" edge="1" parent="1" source="GameControllerFrontend" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;strokeWidth=2;endArrow=block;endFill=0;strokeColor=#000000;fontColor=#000000;" target="GameControllerBackend" value="REST / JSON">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="395" />
+              <mxPoint x="1160" y="395" />
+              <mxPoint x="1160" y="790" />
+              <mxPoint x="1220" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
