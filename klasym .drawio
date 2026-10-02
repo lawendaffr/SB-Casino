@@ -1,192 +1,268 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
-  <diagram id="kasyno-class-diagram" name="Kasyno - Class Diagram">
-    <mxGraphModel dx="4057" dy="2900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+<mxfile host="app.diagrams.net">
+  <diagram name="Kasyno - Class Diagram" id="kasyno-simple-class">
+    <mxGraphModel dx="1546" dy="831" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="frontend" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#6a00ff;strokeColor=#3700CC;fontStyle=1;startSize=30;fontColor=#ffffff;fillStyle=auto;labelBackgroundColor=none;strokeWidth=7;" value="&amp;lt;&amp;gt;&#xa;FRONTEND" vertex="1">
-          <mxGeometry height="520" width="310" x="-490" y="-240" as="geometry" />
+        <mxCell id="User" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="User" vertex="1">
+          <mxGeometry height="270" width="170" x="600" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="frontend-pages" parent="frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;align=left;verticalAlign=top;spacing=8;fontColor=#ffffff;" value="Pages / Components&#xa;&#xa;+ LoginPage()&#xa;+ RegisterPage()&#xa;+ ProfilePage()&#xa;+ GamesPage()&#xa;+ LeaderboardPage()&#xa;+ AdminPage()" vertex="1">
-          <mxGeometry height="180" width="270" x="15" y="50" as="geometry" />
+        <mxCell id="User_attr1" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- id : Long" vertex="1">
+          <mxGeometry height="30" width="170" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="frontend-api" parent="frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;align=left;verticalAlign=top;spacing=8;fontColor=#ffffff;" value="ApiClient&#xa;&#xa;+ login()&#xa;+ register()&#xa;+ getProfile()&#xa;+ getGames()&#xa;+ getLeaderboard()&#xa;+ getHistory()&#xa;+ adminRequest()" vertex="1">
-          <mxGeometry height="145" width="270" x="15" y="245" as="geometry" />
+        <mxCell id="User_attr2" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- username : String" vertex="1">
+          <mxGeometry height="30" width="170" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="frontend-auth" parent="frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;align=left;verticalAlign=top;spacing=8;fontColor=#ffffff;" value="Auth / State&#xa;&#xa;+ accessToken&#xa;+ refreshToken&#xa;+ isAuthenticated()&#xa;+ logout()&#xa;+ refreshSession()" vertex="1">
-          <mxGeometry height="115" width="270" x="15" y="395" as="geometry" />
+        <mxCell id="User_attr3" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- email : String" vertex="1">
+          <mxGeometry height="30" width="170" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="account" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;fontStyle=1;startSize=30;strokeWidth=6;" value="&lt;&lt;package&gt;&gt;&#xa;AUTH / ACCOUNT" vertex="1">
-          <mxGeometry height="550" width="360" x="120" y="-460" as="geometry" />
+        <mxCell id="User_attr4" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- password : String" vertex="1">
+          <mxGeometry height="30" width="170" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="user" parent="account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="User&#xa;&#xa;- id&#xa;- username&#xa;- email&#xa;- password&#xa;- role&#xa;- balance&#xa;&#xa;+ getId()&#xa;+ getUsername()&#xa;+ getRole()&#xa;+ getBalance()" vertex="1">
-          <mxGeometry height="185" width="155" x="15" y="50" as="geometry" />
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-12" edge="1" parent="User" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" target="User_attr6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="210" as="sourcePoint" />
+            <mxPoint x="50" y="160" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="auth-service" parent="account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="AuthService&#xa;&#xa;+ register()&#xa;+ login()&#xa;+ refreshToken()&#xa;+ logout()&#xa;+ deleteAccount()" vertex="1">
-          <mxGeometry height="150" width="155" x="180" y="50" as="geometry" />
+        <mxCell id="User_attr5" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- role : Role" vertex="1">
+          <mxGeometry height="30" width="170" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="auth-controller" parent="account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="AuthController&#xa;&#xa;+ register()&#xa;+ login()&#xa;+ refresh()&#xa;+ logout()" vertex="1">
-          <mxGeometry height="130" width="155" x="180" y="215" as="geometry" />
+        <mxCell id="User_attr6" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- balance : BigDecimal" vertex="1">
+          <mxGeometry height="30" width="170" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="user-repository" parent="account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="UserRepository&#xa;&#xa;+ findByUsername()&#xa;+ findByEmail()&#xa;+ save()&#xa;+ delete()" vertex="1">
-          <mxGeometry height="125" width="155" x="15" y="255" as="geometry" />
+        <mxCell id="User_methods" parent="User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ getId() : Long&lt;br&gt;+ getUsername() : String&lt;br&gt;+ getBalance() : BigDecimal" vertex="1">
+          <mxGeometry height="60" width="170" y="210" as="geometry" />
         </mxCell>
-        <mxCell id="account-other" parent="account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="Account operations&#xa;&#xa;+ updateProfile()&#xa;+ changePassword()&#xa;+ updateBalance()&#xa;+ validateCredentials()" vertex="1">
-          <mxGeometry height="100" width="320" x="15" y="400" as="geometry" />
+        <mxCell id="RefreshToken" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="RefreshToken" vertex="1">
+          <mxGeometry height="180" width="170" x="330" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="rel-user-repo" edge="1" parent="account" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2D7600;endArrow=none;startArrow=none;fillColor=#60a917;" target="user-repository" value="">
+        <mxCell id="RT_attr1" parent="RefreshToken" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- id : Long" vertex="1">
+          <mxGeometry height="30" width="170" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RT_attr2" parent="RefreshToken" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- token : String" vertex="1">
+          <mxGeometry height="30" width="170" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-13" edge="1" parent="RefreshToken" source="RT_methods" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" target="RT_methods" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="130" as="sourcePoint" />
+            <mxPoint x="50" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RT_attr3" parent="RefreshToken" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- expiresAt : Instant" vertex="1">
+          <mxGeometry height="30" width="170" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="RT_methods" parent="RefreshToken" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ isExpired() : boolean&lt;br&gt;+ getToken() : String" vertex="1">
+          <mxGeometry height="60" width="170" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AuthService" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="AuthService" vertex="1">
+          <mxGeometry height="210" width="190" x="1260" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="AS_attr1" parent="AuthService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- users : User[]" vertex="1">
+          <mxGeometry height="30" width="190" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-11" edge="1" parent="AuthService" source="AS_methods" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" target="AS_methods" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="120" as="sourcePoint" />
+            <mxPoint x="50" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AS_attr2" parent="AuthService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- jwtService : JwtService" vertex="1">
+          <mxGeometry height="30" width="190" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AS_methods" parent="AuthService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ register() : User&lt;br&gt;+ login() : String&lt;br&gt;+ refreshToken() : String&lt;br&gt;+ logout() : void" vertex="1">
+          <mxGeometry height="120" width="190" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Game" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;&lt;interface&gt;&gt;&lt;br&gt;Game" vertex="1">
+          <mxGeometry height="150" width="170" x="520" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-7" edge="1" parent="Game" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="90" as="sourcePoint" />
+            <mxPoint x="170" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Game_attr" parent="Game" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- name : String&lt;br&gt;- minBet : BigDecimal" vertex="1">
+          <mxGeometry height="50" width="170" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Game_methods" parent="Game" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ play() : GameResult&lt;br&gt;+ calculateResult() : Result" vertex="1">
+          <mxGeometry height="60" width="170" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="GameService" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="GameService" vertex="1">
+          <mxGeometry height="210" width="190" x="720" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="GS_attr1" parent="GameService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- games : Game[]" vertex="1">
+          <mxGeometry height="30" width="190" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-8" edge="1" parent="GameService" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" target="GS_attr2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="90" as="sourcePoint" />
+            <mxPoint x="50" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GS_attr2" parent="GameService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- user : User" vertex="1">
+          <mxGeometry height="30" width="190" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GS_methods" parent="GameService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ play() : GameResult&lt;br&gt;+ calculateResult() : Result&lt;br&gt;+ updateBalance() : void&lt;br&gt;+ saveResult() : void" vertex="1">
+          <mxGeometry height="120" width="190" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Slots" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="Slots" vertex="1">
+          <mxGeometry height="180" width="170" x="220" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Slots_attr" parent="Slots" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- reels : int[]&lt;br&gt;- symbols : String[]" vertex="1">
+          <mxGeometry height="60" width="170" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slots_methods" parent="Slots" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ play() : GameResult&lt;br&gt;+ calculateResult() : Result" vertex="1">
+          <mxGeometry height="90" width="170" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-4" edge="1" parent="Slots" source="Slots_methods" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="Slots" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="60" as="sourcePoint" />
+            <mxPoint x="330" y="10" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mines" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="Mines" vertex="1">
+          <mxGeometry height="180" width="170" x="220" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="Mines_attr" parent="Mines" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- mines : int&lt;br&gt;- grid : boolean[][]" vertex="1">
+          <mxGeometry height="60" width="170" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-14" edge="1" parent="Mines" source="Mines_methods" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" target="Mines_methods" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="110" as="sourcePoint" />
+            <mxPoint x="50" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mines_methods" parent="Mines" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ play() : GameResult&lt;br&gt;+ calculateResult() : Result" vertex="1">
+          <mxGeometry height="90" width="170" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Roulette" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="Roulette" vertex="1">
+          <mxGeometry height="180" width="170" x="220" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="Roulette_attr" parent="Roulette" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- number : int&lt;br&gt;- color : String" vertex="1">
+          <mxGeometry height="60" width="170" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-6" edge="1" parent="Roulette" source="Roulette_methods" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" target="Roulette_methods" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="140" as="sourcePoint" />
+            <mxPoint x="50" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Roulette_methods" parent="Roulette" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ play() : GameResult&lt;br&gt;+ calculateResult() : Result" vertex="1">
+          <mxGeometry height="90" width="170" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="GameResult" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="GameResult" vertex="1">
+          <mxGeometry height="240" width="190" x="1110" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="GR_attr1" parent="GameResult" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- id : Long" vertex="1">
+          <mxGeometry height="30" width="190" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GR_attr2" parent="GameResult" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- user : User" vertex="1">
+          <mxGeometry height="30" width="190" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GR_attr3" parent="GameResult" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- gameType : String" vertex="1">
+          <mxGeometry height="30" width="190" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-9" edge="1" parent="GameResult" source="GR_methods" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" target="GR_methods" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="160" as="sourcePoint" />
+            <mxPoint x="50" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GR_attr4" parent="GameResult" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- amount : BigDecimal" vertex="1">
+          <mxGeometry height="30" width="190" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="GR_methods" parent="GameResult" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ createResult() : GameResult&lt;br&gt;+ getResult() : Result" vertex="1">
+          <mxGeometry height="90" width="190" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Transaction" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;" value="Transaction" vertex="1">
+          <mxGeometry height="210" width="190" x="1110" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="TR_attr1" parent="Transaction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- id : Long" vertex="1">
+          <mxGeometry height="30" width="190" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TR_attr2" parent="Transaction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- user : User" vertex="1">
+          <mxGeometry height="30" width="190" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SOnz4QSUVfwuJyL58DtA-10" edge="1" parent="Transaction" source="TR_attr3" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" target="TR_methods" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint y="130" as="sourcePoint" />
+            <mxPoint x="50" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TR_attr3" parent="Transaction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="- amount : BigDecimal" vertex="1">
+          <mxGeometry height="30" width="190" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="TR_methods" parent="Transaction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;whiteSpace=wrap;html=1;" value="+ create() : Transaction&lt;br&gt;+ getAmount() : BigDecimal" vertex="1">
+          <mxGeometry height="90" width="190" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_user_refresh" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamondThin;startFill=1;endArrow=none;exitX=0;exitY=0.5;entryX=1;entryY=0.5;startSize=10;" target="RefreshToken">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel-auth-service-user" edge="1" parent="account" source="auth-service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2D7600;endArrow=none;startArrow=none;fillColor=#60a917;" target="user" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rel-auth-controller-service" edge="1" parent="account" source="auth-controller" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2D7600;endArrow=none;startArrow=none;fillColor=#60a917;" target="auth-service" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="security" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;fontStyle=1;startSize=30;strokeWidth=5;" value="&lt;&lt;package&gt;&gt;&#xa;JWT / SECURITY" vertex="1">
-          <mxGeometry height="300" width="330" x="588.7" y="360" as="geometry" />
-        </mxCell>
-        <mxCell id="jwt-service" parent="security" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="JwtService&#xa;&#xa;+ generateAccessToken()&#xa;+ generateRefreshToken()&#xa;+ validateToken()&#xa;+ extractUsername()" vertex="1">
-          <mxGeometry height="145" width="145" x="15" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="jwt-filter" parent="security" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="JwtAuthenticationFilter&#xa;&#xa;+ doFilter()&#xa;+ authenticateRequest()" vertex="1">
-          <mxGeometry height="115" width="145" x="170" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="security-config" parent="security" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="SecurityConfig&#xa;&#xa;+ securityFilterChain()&#xa;+ passwordEncoder()&#xa;+ authenticationProvider()" vertex="1">
-          <mxGeometry height="70" width="300" x="15" y="210" as="geometry" />
-        </mxCell>
-        <mxCell id="games" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;fontStyle=1;startSize=30;strokeWidth=5;" value="&lt;&lt;package&gt;&gt;&#xa;GAMES" vertex="1">
-          <mxGeometry height="390" width="350" x="110" y="990" as="geometry" />
-        </mxCell>
-        <mxCell id="game-controller" parent="games" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="GameController&#xa;&#xa;+ playGame()&#xa;+ getGames()&#xa;+ getGameHistory()" vertex="1">
-          <mxGeometry height="115" width="155" x="15" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="game-service" parent="games" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="GameService&#xa;&#xa;+ play()&#xa;+ calculateResult()&#xa;+ updateBalance()&#xa;+ saveResult()" vertex="1">
-          <mxGeometry height="130" width="155" x="180" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="game-types" parent="games" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="Game implementations&#xa;&#xa;Slots&#xa;Mines&#xa;Roulette&#xa;Blackjack&#xa;Plinko&#xa;&#xa;+ play()&#xa;+ calculateResult()" vertex="1">
-          <mxGeometry height="180" width="155" x="15" y="185" as="geometry" />
-        </mxCell>
-        <mxCell id="game-result" parent="games" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;align=left;verticalAlign=top;spacing=8;" value="GameResult&#xa;&#xa;- id&#xa;- user&#xa;- gameType&#xa;- result&#xa;- timestamp&#xa;- amount&#xa;&#xa;+ createResult()" vertex="1">
-          <mxGeometry height="165" width="155" x="180" y="200" as="geometry" />
-        </mxCell>
-        <mxCell id="rel-game-controller-service" edge="1" parent="games" source="game-controller" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C73500;endArrow=none;startArrow=none;fillColor=#fa6800;" target="game-service" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rel-game-service-result" edge="1" parent="games" source="game-service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C73500;endArrow=none;startArrow=none;fillColor=#fa6800;" target="game-result" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="stats" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;fontStyle=1;startSize=30;strokeWidth=5;" value="&lt;&lt;package&gt;&gt;&#xa;HISTORY / STATS" vertex="1">
-          <mxGeometry height="350" width="360" x="-500" y="980" as="geometry" />
-        </mxCell>
-        <mxCell id="history" parent="stats" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="HistoryService&#xa;&#xa;+ getGameHistory()&#xa;+ getTransactions()&#xa;+ getUserStats()" vertex="1">
-          <mxGeometry height="120" width="145" x="15" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="leaderboard" parent="stats" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="LeaderboardService&#xa;&#xa;+ getLeaderboard()&#xa;+ getRanking()&#xa;+ calculateStats()" vertex="1">
-          <mxGeometry height="120" width="145" x="170" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="transaction" parent="stats" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="Transaction&#xa;&#xa;- id&#xa;- user&#xa;- type&#xa;- amount&#xa;- timestamp&#xa;&#xa;+ create()" vertex="1">
-          <mxGeometry height="150" width="145" x="15" y="185" as="geometry" />
-        </mxCell>
-        <mxCell id="stats-other" parent="stats" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="Statistics / Reports&#xa;&#xa;+ totalGames()&#xa;+ totalWins()&#xa;+ totalLosses()&#xa;+ calculateBalance()" vertex="1">
-          <mxGeometry height="150" width="145" x="170" y="185" as="geometry" />
-        </mxCell>
-        <mxCell id="admin" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;fontStyle=1;startSize=30;strokeWidth=5;" value="&lt;&lt;package&gt;&gt;&#xa;ADMIN / MODERATION" vertex="1">
-          <mxGeometry height="390" width="300" x="-470" y="440" as="geometry" />
-        </mxCell>
-        <mxCell id="admin-controller" parent="admin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="AdminController&#xa;&#xa;+ getUsers()&#xa;+ warnUser()&#xa;+ suspendUser()&#xa;+ banUser()&#xa;+ reports()" vertex="1">
-          <mxGeometry height="135" width="270" x="15" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="moderation" parent="admin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="ModerationService&#xa;&#xa;+ warn()&#xa;+ suspend()&#xa;+ ban()&#xa;+ unban()&#xa;+ deleteUser()" vertex="1">
-          <mxGeometry height="125" width="130" x="15" y="200" as="geometry" />
-        </mxCell>
-        <mxCell id="reports" parent="admin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="ReportService&#xa;&#xa;+ createReport()&#xa;+ getReports()&#xa;+ resolveReport()" vertex="1">
-          <mxGeometry height="125" width="130" x="155" y="200" as="geometry" />
-        </mxCell>
-        <mxCell id="database" parent="1" style="swimlane;html=1;rounded=0;whiteSpace=wrap;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;fontStyle=1;startSize=30;strokeWidth=5;" value="&lt;&lt;database&gt;&gt;&#xa;POSTGRESQL" vertex="1">
-          <mxGeometry height="490" width="300" x="130" y="340" as="geometry" />
-        </mxCell>
-        <mxCell id="db-tables" parent="database" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;align=left;verticalAlign=top;spacing=10;" value="Tables&#xa;&#xa;users&#xa;&#xa;refresh_tokens&#xa;&#xa;game_results&#xa;&#xa;transactions&#xa;&#xa;reports&#xa;&#xa;moderation_actions" vertex="1">
-          <mxGeometry height="270" width="260" x="20" y="55" as="geometry" />
-        </mxCell>
-        <mxCell id="db-flyway" parent="database" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;align=left;verticalAlign=top;spacing=8;" value="Flyway migrations&#xa;&#xa;+ createTables()&#xa;+ migrate()&#xa;+ validateSchema()" vertex="1">
-          <mxGeometry height="100" width="260" x="20" y="350" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-frontend-account" edge="1" parent="1" source="frontend" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" target="account" value="HTTP / JSON">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-frontend-games" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;entryX=0.144;entryY=0.002;entryDx=0;entryDy=0;entryPerimeter=0;" target="games" value="HTTP / JSON">
+        <mxCell id="rel_user_result" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamondThin;startFill=1;endArrow=none;startSize=10;" target="GameResult">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-180" y="170" />
-              <mxPoint x="50" y="170" />
+              <mxPoint x="1230" y="255" />
             </Array>
-            <mxPoint x="-180" y="160" as="sourcePoint" />
-            <mxPoint x="116.83" y="1099.61" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge-account-security" edge="1" parent="1" source="account" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" target="security" value="authentication">
+        <mxCell id="rel_user_transaction" edge="1" parent="1" source="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamondThin;startFill=1;endArrow=none;startSize=10;" target="Transaction">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="360" />
+              <mxPoint x="1080" y="885" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_service_game" edge="1" parent="1" source="GS_attr2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamondThin;startFill=0;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;startSize=10;" target="Game">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-security-db" edge="1" parent="1" source="security" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" value="tokens / users">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="440" y="507.05" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge-account-db" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" target="database" value="CRUD">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="280" y="90" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge-games-account" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" target="account" value="user / balance">
+        <mxCell id="rel_slots_game" edge="1" parent="1" source="Slots" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;endSize=10;" target="Game">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="560" y="1110" />
-              <mxPoint x="560" y="-185" />
-            </Array>
-            <mxPoint x="460" y="1110" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge-games-stats" edge="1" parent="1" source="games" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="stats" value="results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-games-db" edge="1" parent="1" source="games" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;entryX=1;entryY=1;entryDx=0;entryDy=0;" target="database" value="results">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="265" y="980" />
-            </Array>
-            <mxPoint x="630" y="930" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge-stats-db" edge="1" parent="1" source="stats" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FFFFFF;fontColor=#000000;endArrow=block;endFill=1;" target="database" value="queries">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="-220" y="1140" />
-              <mxPoint x="230" y="1140" />
+              <mxPoint x="420" y="650" />
+              <mxPoint x="420" y="555" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge-admin-account" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;exitX=0.858;exitY=-0.001;exitDx=0;exitDy=0;exitPerimeter=0;" target="account" value="manage users">
+        <mxCell id="rel_mines_game" edge="1" parent="1" source="Mines" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;endSize=10;" target="Game">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-200" y="439.59" />
-              <mxPoint x="-200" y="310.06" />
-              <mxPoint x="540" y="310.06" />
-              <mxPoint x="540" y="-159.94" />
+              <mxPoint x="500" y="490" />
+              <mxPoint x="500" y="490" />
             </Array>
-            <mxPoint x="-170" y="620" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge-admin-stats" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" target="stats" value="reports">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-admin-db" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;fontColor=#000000;endArrow=block;endFill=1;" value="moderation data">
+        <mxCell id="rel_roulette_game" edge="1" parent="1" source="Roulette" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;endSize=10;" target="Game">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-10" y="635" />
-              <mxPoint x="-10" y="700" />
+              <mxPoint x="460" y="840" />
+              <mxPoint x="460" y="600" />
             </Array>
-            <mxPoint x="130" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_auth_user" edge="1" parent="1" source="AuthService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;" target="User">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="235" />
+              <mxPoint x="780" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_game_user" edge="1" parent="1" source="GameService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;" target="User">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800.03" y="440.03" />
+              <mxPoint x="685" y="440.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_game_result" edge="1" parent="1" source="GameService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;" target="GameResult">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="600" />
+              <mxPoint x="960" y="600" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
