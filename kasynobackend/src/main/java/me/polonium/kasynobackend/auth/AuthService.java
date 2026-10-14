@@ -6,13 +6,18 @@ import me.polonium.kasynobackend.auth.dto.LoginRequest;
 import me.polonium.kasynobackend.auth.dto.RegisterRequest;
 import me.polonium.kasynobackend.auth.dto.UserResponse;
 import me.polonium.kasynobackend.auth.dto.RefreshResult;
+import me.polonium.kasynobackend.entity.Transaction;
+import me.polonium.kasynobackend.entity.TransactionType;
 import me.polonium.kasynobackend.entity.User;
 import me.polonium.kasynobackend.entity.UserRole;
+import me.polonium.kasynobackend.repository.TransactionRepository;
 import me.polonium.kasynobackend.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDateTime;
 
 @Service
 public class AuthService {
@@ -21,14 +26,16 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
+    private final TransactionRepository transactionRepository;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, RefreshTokenService refreshTokenService) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, RefreshTokenService refreshTokenService, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
+        this.transactionRepository = transactionRepository;
     }
-
+@Transactional
     public UserResponse register(RegisterRequest request) {
         if(userRepository.existsByUsername(request.username())) {
 
@@ -41,10 +48,19 @@ public class AuthService {
 
         user.setUsername(request.username());
         user.setPasswordHash(passwordEncoder.encode(request.password()));
-        user.setBalance(1000);
         user.setRole(UserRole.USER);
 
         User savedUser = userRepository.save(user);
+        Transaction transaction = new Transaction();
+        transaction.setUser(user);
+        transaction.setType(TransactionType.DEPOSIT);
+        transaction.setAmount(1000);
+        transaction.setBalanceBefore(0);
+        transaction.setBalanceAfter(1000);
+        transaction.setDescription("Initial fictional credits");
+        transaction.setCreatedAt(LocalDateTime.now());
+
+        transactionRepository.save(transaction);
 
         return new UserResponse(
                 savedUser.getId(),
