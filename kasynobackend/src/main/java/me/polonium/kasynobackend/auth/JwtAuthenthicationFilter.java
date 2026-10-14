@@ -15,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Component
 public class JwtAuthenthicationFilter extends OncePerRequestFilter   {
@@ -48,6 +49,11 @@ public class JwtAuthenthicationFilter extends OncePerRequestFilter   {
         User user = userRepository.findById(userId).orElse(null);
         if(user == null) {
             filterChain.doFilter(request,response);
+            return;
+        }
+
+        if (user.isRestrictedAt(LocalDateTime.now())) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Account is restricted");
             return;
         }
 

@@ -12,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
+import me.polonium.kasynobackend.depositcode.DepositCodeService;
+import me.polonium.kasynobackend.depositcode.dto.CreateDepositCodeRequest;
+import me.polonium.kasynobackend.depositcode.dto.DepositCodeResponse;
+import me.polonium.kasynobackend.entity.RedemptionPolicy;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,6 +37,9 @@ class BalanceIntegrationTest {
     private TransactionRepository transactionRepository;
 
     private Long userId;
+
+    @Autowired
+    private DepositCodeService depositCodeService;
 
     @BeforeEach
     void setUp() {
@@ -105,5 +113,117 @@ class BalanceIntegrationTest {
         assertEquals(250, transactions.get(0).getAmount());
         assertEquals(1000, transactions.get(0).getBalanceBefore());
         assertEquals(1250, transactions.get(0).getBalanceAfter());
+    }
+
+    @Test
+    void onceTotalCodeCanOnlyBeRedeemedOnce() {
+        DepositCodeResponse code = depositCodeService.createCode(
+                new CreateDepositCodeRequest(
+                        500, RedemptionPolicy.ONCE_TOTAL, null, null
+                )
+        );
+
+        depositCodeService.redeemCode(userId, code.code());
+
+        assertEquals(1500, balanceService.getBalance(userId));
+
+        assertThrows(
+                ResponseStatusException.class,
+                () -> depositCodeService.redeemCode(userId, code.code())
+        );
+
+        assertEquals(1500, balanceService.getBalance(userId));
+    }
+
+    @Test
+    void oncePerUserCodeCanBeRedeemedByDifferentUsers() {
+        DepositCodeResponse code = depositCodeService.createCode(
+                new CreateDepositCodeRequest(
+                        500, RedemptionPolicy.ONCE_PER_USER, null, null
+                )
+        );
+
+        depositCodeService.redeemCode(userId, code.code());
+
+        assertThrows(
+                ResponseStatusException.class,
+                () -> depositCodeService.redeemCode(userId, code.code())
+        );
+
+        User anotherUser = new User();
+        anotherUser.setUsername("balance-test-user-2");
+        anotherUser.setPasswordHash("test-hash");
+        anotherUser.setBalance(1000);
+        anotherUser.setRole(UserRole.USER);
+
+        Long anotherUserId = userRepository.save(anotherUser).getId();
+
+        depositCodeService.redeemCode(anotherUserId, code.code());
+
+        assertEquals(1500, balanceService.getBalance(userId));
+        assertEquals(1500, balanceService.getBalance(anotherUserId));
+    }
+
+    @Test
+    void limitedUsesCodeStopsAtMaximum() {
+        DepositCodeResponse code = depositCodeService.createCode(
+                new CreateDepositCodeRequest(
+                        250, RedemptionPolicy.LIMITED_USES, 2L, null
+                )
+        );
+
+        depositCodeService.redeemCode(userId, code.code());
+
+        User anotherUser = new User();
+        anotherUser.setUsername("limited-code-user");
+        anotherUser.setPasswordHash("test-hash");
+        anotherUser.setBalance(1000);
+        anotherUser.setRole(UserRole.USER);
+
+        Long anotherUserId = userRepository.save(anotherUser).getId();
+
+        depositCodeService.redeemCode(anotherUserId, code.code());
+
+        User thirdUser = new User();
+        thirdUser.setUsername("limited-code-user-3");
+        thirdUser.setPasswordHash("test-hash");
+        thirdUser.setBalance(1000);
+        thirdUser.setRole(UserRole.USER);
+
+        Long thirdUserId = userRepository.save(thirdUser).getId();
+
+        assertThrows(
+                ResponseStatusException.class,
+                () -> depositCodeService.redeemCode(thirdUserId, code.code())
+        );
+
+        assertEquals(1250, balanceService.getBalance(userId));
+        assertEquals(1250, balanceService.getBalance(anotherUserId));
+        assertEquals(1000, balanceService.getBalance(thirdUserId));
+    }
+
+    @Test
+    void failedRedemptionDoesNotCreateExtraTransaction() {
+        DepositCodeResponse code = depositCodeService.createCode(
+                new CreateDepositCodeRequest(
+                        500, RedemptionPolicy.ONCE_PER_USER, null, null
+                )
+        );
+
+        depositCodeService.redeemCode(userId, code.code());
+
+        assertThrows(
+                ResponseStatusException.class,
+                () -> depositCodeService.redeemCode(userId, code.code())
+        );
+
+        List<Transaction> transactions =
+                transactionRepository.findByUserIdOrderByCreatedAtDesc(userId);
+
+        assertEquals(1, transactions.size());
+        assertEquals(TransactionType.DEPOSIT, transactions.get(0).getType());
+        assertEquals(500, transactions.get(0).getAmount());
+        assertEquals(1000, transactions.get(0).getBalanceBefore());
+        assertEquals(1500, transactions.get(0).getBalanceAfter());
     }
 }

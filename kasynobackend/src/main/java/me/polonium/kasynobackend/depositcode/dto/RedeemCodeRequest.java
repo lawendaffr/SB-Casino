@@ -1,4 +1,4 @@
 package me.polonium.kasynobackend.depositcode.dto;
 
-public record RedeemCodeRequest() {
+public record RedeemCodeRequest(String code) {
 }
