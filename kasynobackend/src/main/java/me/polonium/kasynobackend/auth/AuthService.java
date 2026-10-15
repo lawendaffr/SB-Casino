@@ -9,6 +9,7 @@ import me.polonium.kasynobackend.auth.dto.RefreshResult;
 import me.polonium.kasynobackend.entity.Transaction;
 import me.polonium.kasynobackend.entity.TransactionType;
 import me.polonium.kasynobackend.entity.User;
+import me.polonium.kasynobackend.entity.AccountStatus;
 import me.polonium.kasynobackend.entity.UserRole;
 import me.polonium.kasynobackend.repository.TransactionRepository;
 import me.polonium.kasynobackend.repository.UserRepository;
@@ -44,11 +45,16 @@ public class AuthService {
                     "Username is already in use"
             );
         }
+        if (request.email() != null && userRepository.existsByEmailIgnoreCase(request.email())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email is already in use");
+        }
         User user = new User();
 
         user.setUsername(request.username());
+        user.setEmail(request.email());
         user.setPasswordHash(passwordEncoder.encode(request.password()));
         user.setRole(UserRole.USER);
+        user.setBalance(1000);
 
         User savedUser = userRepository.save(user);
         Transaction transaction = new Transaction();
@@ -84,6 +90,10 @@ public class AuthService {
                     "Invalid username or password"
             );
         }
+        if (user.isRestrictedAt(LocalDateTime.now())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    user.getAccountStatus() == AccountStatus.BANNED ? "Account is banned" : "Account is timed out");
+        }
         String accessToken = jwtService.generateToken(
                 user.getId(),
                 user.getUsername()
@@ -98,6 +108,9 @@ public class AuthService {
                 refreshTokenService.rotate(rawRefreshToken);
 
         User user = result.user();
+        if (user.isRestrictedAt(LocalDateTime.now())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Account is restricted");
+        }
 
         String accessToken = jwtService.generateToken(
                 user.getId(),

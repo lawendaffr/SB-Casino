@@ -56,7 +56,8 @@ Content-Type: application/json
 ```json
 {
   "username": "testuser",
-  "password": "password123"
+  "password": "password123",
+  "email": "testuser@example.com"
 }
 ```
 
@@ -66,6 +67,7 @@ Content-Type: application/json
 | ---------- | -------------------------- |
 | `username` | Required, 3–50 characters  |
 | `password` | Required, 8–100 characters |
+| `email`    | Optional, valid email address |
 
 New users:
 
@@ -237,6 +239,7 @@ Roles are stored in the database.
 | `/api/auth/**`  | Public              |
 | `/api/test/**`  | Public              |
 | `/api/admin/**` | `ADMIN` only        |
+| `/api/moderation/**` | `MODERATOR` or `ADMIN` |
 | Other endpoints | Authenticated users |
 
 Requests without a valid access token receive:
@@ -250,6 +253,105 @@ Authenticated users without sufficient permissions receive:
 ```text
 403 Forbidden
 ```
+
+---
+
+# Game History
+
+## Account management
+
+* `GET /api/users/me/account` returns the current username and email.
+* `PATCH /api/users/me/account` can update `username`, `email`, or `newPassword`. To change a password, send `currentPassword` and `newPassword` together. Changing the password revokes refresh tokens.
+* `DELETE /api/users/me` permanently deletes the account and its balance transactions, game history, and refresh tokens. Send `{"currentPassword":"..."}` to confirm. The final admin account cannot delete itself.
+* `GET /api/users/me/moderation-actions?page=0&size=20` shows warnings and other moderation actions on the current account.
+
+## Find and report users
+
+* `GET /api/users/search?q=name&page=0&size=20` searches public usernames.
+* `GET /api/users/{userId}/profile` returns a public profile with completed-game statistics.
+* `POST /api/users/reports` submits a report: `{"targetUserId": 12, "reason": "..."}`. Self-reports are rejected.
+
+## List your games
+
+Returns game records across all game types, newest first. Active games are included.
+
+```http
+GET /api/users/me/games?page=0&size=20
+Authorization: Bearer <access-token>
+```
+
+`page` is zero-based. `size` defaults to 20 and must be between 1 and 100.
+
+```json
+{
+  "games": [
+    {
+      "id": 42,
+      "gameType": "BLACKJACK",
+      "status": "COMPLETED",
+      "bet": 100,
+      "payout": 200,
+      "netResult": 100,
+      "result": "PLAYER_WIN",
+      "createdAt": "2026-10-14T13:10:00",
+      "finishedAt": "2026-10-14T13:12:00"
+    }
+  ],
+  "page": 0,
+  "pageSize": 20,
+  "totalElements": 1,
+  "totalPages": 1
+}
+```
+
+`payout` is the total amount returned to the player; `netResult` is `payout - bet` for completed games and `null` while active. Active games have a `null` `finishedAt`.
+
+Invalid pagination values receive `400 Bad Request`.
+
+## Player statistics
+
+`GET /api/users/me/stats` returns totals from completed shared game records:
+
+```json
+{
+  "gamesPlayed": 8,
+  "wins": 4,
+  "losses": 3,
+  "pushes": 1,
+  "totalBet": 800,
+  "totalPayout": 900,
+  "netResult": 100
+}
+```
+
+## Leaderboard
+
+`GET /api/users/leaderboard?page=0&size=20` is available to authenticated users. It is paginated and ranks users by completed-game net result, highest first.
+
+## Moderation reports
+
+`GET /api/moderation/reports` is available to moderators and admins. It summarizes user count and active/completed game counts, total bets, payouts, and net result. Monetary totals use completed shared game records.
+
+`GET /api/moderation/users?page=0&size=20` lists user accounts for moderators and admins without exposing password hashes.
+
+Moderators and admins can also search users with `GET /api/moderation/users?q=name&page=0&size=20`. They can review user-submitted reports with `GET /api/moderation/user-reports?status=OPEN&page=0&size=20` and update a report using `PATCH /api/moderation/user-reports/{reportId}` with `{"status":"REVIEWED"}` or `{"status":"DISMISSED"}`.
+
+Enforcement endpoints are `POST /api/moderation/users/{userId}/warn`, `/timeout`, `/ban`, and `/unban`. Each takes a reason; timeout also takes `hours` from 1 to 720. Bans and active timeouts block login and reject requests using existing access tokens. Moderators can act on player accounts; only admins can moderate moderator/admin accounts. Action history is available at `GET /api/moderation/users/{userId}/actions?page=0&size=20`.
+
+## Admin user management
+
+These endpoints require the `ADMIN` role:
+
+* `GET /api/admin/users?page=0&size=20` lists users without exposing password hashes.
+* `PATCH /api/admin/users/{userId}/balance` adjusts a balance. Send a signed non-zero `amount` and optional reason, for example `{"amount": 250, "reason": "Support correction"}`. Negative adjustments cannot reduce a balance below zero.
+* `PATCH /api/admin/users/{userId}/role` changes a role, for example `{"role": "MODERATOR"}`.
+* `GET /api/admin/logs?page=0&size=20` lists audited staff actions.
+* `GET /api/admin/codes?page=0&size=20` lists deposit codes; existing create and deactivate endpoints remain available.
+* `GET /api/admin/games` lists configured games. `PATCH /api/admin/games/{gameType}` updates availability and maximum bet, for example `{"enabled":false,"maxBet":100000}`. The current Blackjack maximum is capped at 1,000,000 credits.
+
+Players can see currently enabled games at `GET /api/games`.
+
+Paginated endpoints use page zero by default and accept sizes from 1 to 100. API errors use a JSON object with `timestamp`, `status`, `error`, `message`, and `path` fields.
 
 ---
 
