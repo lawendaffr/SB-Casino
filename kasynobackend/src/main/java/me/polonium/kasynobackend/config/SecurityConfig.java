@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/test/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/moderation/**").hasAnyRole("MODERATOR", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(

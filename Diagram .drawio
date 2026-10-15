@@ -1,225 +1,276 @@
 <mxfile host="app.diagrams.net">
-  <diagram name="Diagram przypadków użycia" id="0">
-    <mxGraphModel dx="1720" dy="1156" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+  <diagram name="Diagram przypadków użycia" id="usecase-simple">
+    <mxGraphModel dx="3123" dy="2558" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="system" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=none;verticalAlign=top;align=center;fontStyle=1;fontSize=18;" value="System kasyna" vertex="1">
-          <mxGeometry height="900" width="1200" x="180" y="20" as="geometry" />
+        <mxCell id="system" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=light-dark(#FFFFFF,#892661);verticalAlign=top;align=center;fontStyle=1;fontSize=18;" value="&lt;span&gt;System kasyna&lt;/span&gt;" vertex="1">
+          <mxGeometry height="1090" width="1150" x="180" y="-220" as="geometry" />
         </mxCell>
-        <mxCell id="accountGroup" parent="system" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;fillColor=none;verticalAlign=top;align=left;fontStyle=1;fontSize=13;spacingLeft=10;" value="KONTO" vertex="1">
-          <mxGeometry height="300" width="350" x="35" y="60" as="geometry" />
+        <mxCell id="pMOBisBWExgLB03pCygE-16" parent="system" style="shape=ext;double=1;rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;strokeColor=#B20000;fontColor=#ffffff;" value="" vertex="1">
+          <mxGeometry height="436.00000000000006" width="630" x="520" y="654" as="geometry" />
+        </mxCell>
+        <mxCell id="pMOBisBWExgLB03pCygE-15" parent="system" style="shape=ext;double=1;rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="" vertex="1">
+          <mxGeometry height="436.00000000000006" width="520" y="654" as="geometry" />
+        </mxCell>
+        <mxCell id="pMOBisBWExgLB03pCygE-14" parent="system" style="shape=ext;double=1;rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" value="" vertex="1">
+          <mxGeometry height="622.86" width="1150" y="31.14" as="geometry" />
         </mxCell>
         <mxCell id="register" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Zarejestrować konto" vertex="1">
-          <mxGeometry height="55" width="150" x="55" y="115" as="geometry" />
+          <mxGeometry height="68.125" width="155" x="20" y="210.00333333333333" as="geometry" />
         </mxCell>
         <mxCell id="login" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Zalogować się" vertex="1">
-          <mxGeometry height="55" width="135" x="220" y="115" as="geometry" />
+          <mxGeometry height="68.125" width="140" x="240" y="228.37576190476193" as="geometry" />
+        </mxCell>
+        <mxCell id="verify" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zweryfikować konto" vertex="1">
+          <mxGeometry height="68.125" width="155" x="20" y="89.34911255411257" as="geometry" />
         </mxCell>
         <mxCell id="profile" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać profilem" vertex="1">
-          <mxGeometry height="55" width="150" x="55" y="205" as="geometry" />
+          <mxGeometry height="68.125" width="155" x="220" y="119.37670562770565" as="geometry" />
         </mxCell>
         <mxCell id="logout" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wylogować się" vertex="1">
-          <mxGeometry height="55" width="135" x="220" y="205" as="geometry" />
+          <mxGeometry height="68.125" width="140" x="27.5" y="336.7363116883117" as="geometry" />
         </mxCell>
         <mxCell id="delete" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Usunąć konto" vertex="1">
-          <mxGeometry height="55" width="145" x="135" y="285" as="geometry" />
+          <mxGeometry height="68.125" width="145" x="400" y="70.00296103896105" as="geometry" />
         </mxCell>
-        <mxCell id="balanceGroup" parent="system" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;fillColor=none;verticalAlign=top;align=left;fontStyle=1;fontSize=13;spacingLeft=10;" value="SALDO I TRANSAKCJE" vertex="1">
-          <mxGeometry height="300" width="350" x="410" y="60" as="geometry" />
+        <mxCell id="balance" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Sprawdzić saldo" vertex="1">
+          <mxGeometry height="68.125" width="145" x="235" y="336.7321428571429" as="geometry" />
         </mxCell>
-        <mxCell id="viewBalance" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Sprawdzić saldo" vertex="1">
-          <mxGeometry height="55" width="140" x="435" y="115" as="geometry" />
+        <mxCell id="transactions" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać transakcjami" vertex="1">
+          <mxGeometry height="68.125" width="175" x="960" y="501.64772727272725" as="geometry" />
         </mxCell>
-        <mxCell id="voucher" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zrealizować kod waluty" vertex="1">
-          <mxGeometry height="55" width="145" x="595" y="115" as="geometry" />
-        </mxCell>
-        <mxCell id="history" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić historię transakcji" vertex="1">
-          <mxGeometry height="55" width="185" x="435" y="205" as="geometry" />
-        </mxCell>
-        <mxCell id="manageTransactions" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać transakcjami" vertex="1">
-          <mxGeometry height="55" width="185" x="550" y="285" as="geometry" />
-        </mxCell>
-        <mxCell id="gamesGroup" parent="system" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;fillColor=none;verticalAlign=top;align=left;fontStyle=1;fontSize=13;spacingLeft=10;" value="GRY" vertex="1">
-          <mxGeometry height="430" width="390" x="785" y="60" as="geometry" />
+        <mxCell id="transactionHistory" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić historię transakcji" vertex="1">
+          <mxGeometry height="68.125" width="190" x="945" y="399.4316796536797" as="geometry" />
         </mxCell>
         <mxCell id="games" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Korzystać z gier" vertex="1">
-          <mxGeometry height="55" width="160" x="900" y="115" as="geometry" />
-        </mxCell>
-        <mxCell id="slots" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Sloty" vertex="1">
-          <mxGeometry height="55" width="145" x="810" y="210" as="geometry" />
+          <mxGeometry height="68.125" width="160" x="730" y="374.6570649350649" as="geometry" />
         </mxCell>
         <mxCell id="mines" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Miny" vertex="1">
-          <mxGeometry height="55" width="145" x="1005" y="210" as="geometry" />
+          <mxGeometry height="68.125" width="145" x="955" y="238.41453679653682" as="geometry" />
         </mxCell>
         <mxCell id="plinko" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Plinko" vertex="1">
-          <mxGeometry height="55" width="145" x="810" y="300" as="geometry" />
-        </mxCell>
-        <mxCell id="blackjack" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Blackjacka" vertex="1">
-          <mxGeometry height="55" width="145" x="1005" y="300" as="geometry" />
-        </mxCell>
-        <mxCell id="roulette" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Ruletkę" vertex="1">
-          <mxGeometry height="55" width="160" x="900" y="390" as="geometry" />
-        </mxCell>
-        <mxCell id="socialGroup" parent="system" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;fillColor=none;verticalAlign=top;align=left;fontStyle=1;fontSize=13;spacingLeft=10;" value="SPOŁECZNOŚĆ I STATYSTYKI" vertex="1">
-          <mxGeometry height="280" width="350" x="410" y="390" as="geometry" />
-        </mxCell>
-        <mxCell id="leaderboard" parent="system" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" value="Wyświetlić ranking" vertex="1">
-          <mxGeometry height="55" width="145" x="435" y="445" as="geometry" />
+          <mxGeometry height="68.125" width="145" x="620" y="100.37147186147186" as="geometry" />
         </mxCell>
         <mxCell id="stats" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić statystyki" vertex="1">
-          <mxGeometry height="55" width="145" x="595" y="445" as="geometry" />
+          <mxGeometry height="68.125" width="155" x="410" y="467.5524329004329" as="geometry" />
         </mxCell>
         <mxCell id="gameHistory" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić historię gier" vertex="1">
-          <mxGeometry height="55" width="175" x="435" y="535" as="geometry" />
+          <mxGeometry height="68.125" width="180" x="397.5" y="331.3024329004329" as="geometry" />
         </mxCell>
         <mxCell id="report" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zgłosić użytkownika" vertex="1">
-          <mxGeometry height="55" width="115" x="625" y="535" as="geometry" />
-        </mxCell>
-        <mxCell id="moderationGroup" parent="system" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;fillColor=none;verticalAlign=top;align=left;fontStyle=1;fontSize=13;spacingLeft=10;" value="MODERACJA" vertex="1">
-          <mxGeometry height="300" width="350" x="35" y="530" as="geometry" />
+          <mxGeometry height="68.125" width="150" x="295" y="539.8132987012988" as="geometry" />
         </mxCell>
         <mxCell id="searchUsers" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Wyszukać użytkownika" vertex="1">
-          <mxGeometry height="55" width="150" x="50" y="590" as="geometry" />
+          <mxGeometry height="68.125" width="160" x="110" y="788.9514372294373" as="geometry" />
         </mxCell>
         <mxCell id="warn" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Ostrzec użytkownika" vertex="1">
-          <mxGeometry height="55" width="145" x="220" y="590" as="geometry" />
+          <mxGeometry height="68.125" width="155" x="340" y="742.2380952380953" as="geometry" />
         </mxCell>
         <mxCell id="suspend" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zawiesić użytkownika" vertex="1">
-          <mxGeometry height="55" width="150" x="55" y="680" as="geometry" />
+          <mxGeometry height="68.125" width="165" x="330" y="871.9971688311688" as="geometry" />
         </mxCell>
         <mxCell id="ban" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zablokować użytkownika" vertex="1">
-          <mxGeometry height="55" width="145" x="220" y="680" as="geometry" />
-        </mxCell>
-        <mxCell id="reportToSearch" parent="system" style="ellipse;whiteSpace=wrap;html=1;opacity=0;strokeColor=none;fontColor=none;" value="reports" vertex="1">
-          <mxGeometry height="1" width="1" x="175" y="765" as="geometry" />
-        </mxCell>
-        <mxCell id="adminGroup" parent="system" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;fillColor=none;verticalAlign=top;align=left;fontStyle=1;fontSize=13;spacingLeft=10;" value="ADMINISTRACJA" vertex="1">
-          <mxGeometry height="300" width="390" x="785" y="530" as="geometry" />
+          <mxGeometry height="68.125" width="165" x="150" y="975.8123549783551" as="geometry" />
         </mxCell>
         <mxCell id="manageUsers" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać użytkownikami" vertex="1">
-          <mxGeometry height="55" width="165" x="810" y="590" as="geometry" />
+          <mxGeometry height="68.125" width="175" x="940" y="637.8963116883116" as="geometry" />
         </mxCell>
         <mxCell id="manageRoles" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać rolami" vertex="1">
-          <mxGeometry height="55" width="150" x="995" y="590" as="geometry" />
+          <mxGeometry height="68.125" width="150" x="780" y="768.1876450216449" as="geometry" />
         </mxCell>
         <mxCell id="manageGames" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać grami" vertex="1">
-          <mxGeometry height="55" width="150" x="810" y="680" as="geometry" />
+          <mxGeometry height="68.125" width="150" x="1000" y="934.2828831168831" as="geometry" />
         </mxCell>
         <mxCell id="manageVouchers" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zarządzać kodami waluty" vertex="1">
-          <mxGeometry height="55" width="170" x="975" y="680" as="geometry" />
+          <mxGeometry height="68.125" width="180" x="525" y="923.9019307359307" as="geometry" />
         </mxCell>
         <mxCell id="audit" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Przeglądać dziennik audytowy" vertex="1">
-          <mxGeometry height="55" width="190" x="890" y="765" as="geometry" />
+          <mxGeometry height="68.125" width="200" x="510" y="820.0905194805196" as="geometry" />
         </mxCell>
-        <mxCell id="extend-delete-profile" edge="1" parent="system" source="delete" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="profile" value="extends">
+        <mxCell id="slots" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Sloty" vertex="1">
+          <mxGeometry height="57.0952380952381" width="145" x="955" y="317.5657142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="extend-slots" edge="1" parent="system" source="slots" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;extends&amp;gt;&lt;/span&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="extend-slots" edge="1" parent="system" source="slots" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="extends">
+        <mxCell id="blackjack" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Blackjacka" vertex="1">
+          <mxGeometry height="57.0952380952381" width="155" x="950" y="171.2757142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="extend-blackjack" edge="1" parent="system" source="blackjack" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;extends&amp;gt;&lt;/span&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="extend-mines" edge="1" parent="system" source="mines" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="extends">
+        <mxCell id="roulette" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zagrać w Ruletkę" vertex="1">
+          <mxGeometry height="57.0952380952381" width="160" x="947.5" y="100.37619047619047" as="geometry" />
+        </mxCell>
+        <mxCell id="extend-roulette" edge="1" parent="system" source="roulette" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;extends&amp;gt;&lt;/span&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="extend-plinko" edge="1" parent="system" source="plinko" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="extends">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="voucher" parent="system" style="ellipse;whiteSpace=wrap;html=1;" value="Zrealizować kod waluty" vertex="1">
+          <mxGeometry height="57.0952380952381" width="165" x="430" y="223.1904761904762" as="geometry" />
         </mxCell>
-        <mxCell id="extend-blackjack" edge="1" parent="system" source="blackjack" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="extends">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="extend-roulette" edge="1" parent="system" source="roulette" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="extends">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-stats-history" edge="1" parent="system" source="stats" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="gameHistory" value="includes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-warn-search" edge="1" parent="system" source="warn" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="includes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-suspend-search" edge="1" parent="system" source="suspend" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="includes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-ban-search" edge="1" parent="system" source="ban" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="includes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-report-search" edge="1" parent="system" source="report" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="includes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-users-roles" edge="1" parent="system" source="manageUsers" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="manageRoles" value="includes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="include-transactions-history" edge="1" parent="system" source="manageTransactions" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="history" value="includes">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="pMOBisBWExgLB03pCygE-2" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="balance">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="420.03" />
+              <mxPoint x="400" y="167.21" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="user" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Użytkownik" vertex="1">
-          <mxGeometry height="120" width="80" x="55" y="390" as="geometry" />
+          <mxGeometry height="120" width="80" x="55" y="360" as="geometry" />
         </mxCell>
         <mxCell id="moderator" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Moderator" vertex="1">
-          <mxGeometry height="120" width="80" x="55" y="680" as="geometry" />
+          <mxGeometry height="120" width="80" x="55" y="650" as="geometry" />
         </mxCell>
         <mxCell id="admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Administrator" vertex="1">
-          <mxGeometry height="120" width="80" x="1510" y="680" as="geometry" />
+          <mxGeometry height="120" width="80" x="1390" y="650" as="geometry" />
         </mxCell>
         <mxCell id="u-register" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="register">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="420" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="u-login" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="login">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="420" />
+              <mxPoint x="390" y="62.83" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="u-profile" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="profile">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="420" />
+              <mxPoint x="370" y="-42.17" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="u-logout" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="logout">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="u-balance" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="viewBalance">
+        <mxCell id="u-balance" edge="1" parent="1" source="leaderboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="balance">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="u-voucher" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="voucher">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="420" />
+              <mxPoint x="830" y="52.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-transactions" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="transactions">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1170" y="420" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="u-games" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="games">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="980" y="440" />
-              <mxPoint x="980" y="162.5" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="u-leaderboard" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="leaderboard">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="400" y="450" />
-              <mxPoint x="400" y="520" />
-            </Array>
-          </mxGeometry>
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="u-stats" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="stats">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="480" y="450" />
-              <mxPoint x="480" y="480" />
+              <mxPoint x="780" y="420.03" />
+              <mxPoint x="780" y="293.21" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="u-gamehistory" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="gameHistory">
+        <mxCell id="u-gameHistory" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="gameHistory">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="130" y="570" />
+              <mxPoint x="800" y="420.03" />
+              <mxPoint x="800" y="161.9" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="u-report" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="report">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include-register-verify" edge="1" parent="1" source="register" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="verify" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="extend-delete-profile" edge="1" parent="1" source="delete" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;fillColor=#647687;strokeColor=#314354;" target="profile" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;extend&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="extend-mines" edge="1" parent="1" source="mines" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="games" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;extends&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="extend-plinko" edge="1" parent="1" source="plinko" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;fontFamily=Helvetica;fontColor=default;fontStyle=0;align=center;verticalAlign=middle;labelBackgroundColor=default;" target="games" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;extends&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="990.03" y="-129.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include-stats-history" edge="1" parent="1" source="stats" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="gameHistory" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(74, 137, 12));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include-warn-search" edge="1" parent="1" source="warn" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(81, 175, 231));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include-suspend-search" edge="1" parent="1" source="suspend" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(81, 175, 231));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="670" />
+              <mxPoint x="510" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include-ban-search" edge="1" parent="1" source="ban" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(81, 175, 231));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="700" />
+              <mxPoint x="360" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include-report-search" edge="1" parent="1" source="report" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="searchUsers" value="&lt;div&gt;&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(81, 175, 231));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="500" />
+              <mxPoint x="370" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include-transactions-history" edge="1" parent="1" source="transactions" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="transactionHistory" value="&lt;span style=&quot;background-color: light-dark(transparent, rgb(74, 137, 12));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include-users-roles" edge="1" parent="1" source="manageUsers" style="dashed=1;endArrow=open;html=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;" target="manageRoles" value="&lt;span style=&quot;background-color: light-dark(rgb(255, 255, 255), rgb(255, 146, 129));&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="m-search" edge="1" parent="1" source="moderator" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="searchUsers">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="710.03" />
+              <mxPoint x="230" y="602.79" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="m-warn" edge="1" parent="1" source="moderator" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="warn">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="710.03" />
+              <mxPoint x="230" y="557.83" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="m-suspend" edge="1" parent="1" source="moderator" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="suspend">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="710" />
+              <mxPoint x="350" y="710" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="m-ban" edge="1" parent="1" source="moderator" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="ban">
           <mxGeometry relative="1" as="geometry" />
@@ -228,16 +279,29 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="a-roles" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="manageRoles">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="710" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="a-games" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="manageGames">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1210" y="710.03" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="a-vouchers" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="manageVouchers">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="a-audit" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="audit">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="710.03" />
+              <mxPoint x="960" y="710.03" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="gen-moderator" edge="1" parent="1" source="moderator" style="endArrow=block;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;" target="user">
           <mxGeometry relative="1" as="geometry" />
@@ -245,10 +309,23 @@
         <mxCell id="gen-admin" edge="1" parent="1" source="admin" style="endArrow=block;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;" target="moderator">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="820" y="760" />
-              <mxPoint x="820" y="760" />
+              <mxPoint x="1430" y="840" />
+              <mxPoint x="95" y="840" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="pMOBisBWExgLB03pCygE-1" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;" target="leaderboard" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="420" />
+              <mxPoint x="410" y="252.83" />
+            </Array>
+            <mxPoint x="135" y="420" as="sourcePoint" />
+            <mxPoint x="488" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leaderboard" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Wyświetlić ranking" vertex="1">
+          <mxGeometry height="65.625" width="150" x="415" y="219.99727272727273" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -29,6 +29,9 @@ public class DatabaseUserDetailsService implements UserDetailsService {
                 .withUsername(user.getUsername())
                 .password(user.getPasswordHash())
                 .roles(user.getRole().name())
+                .disabled(user.getAccountStatus() == me.polonium.kasynobackend.entity.AccountStatus.BANNED)
+                .accountLocked(user.getSuspendedUntil() != null
+                        && user.getSuspendedUntil().isAfter(java.time.LocalDateTime.now()))
                 .build();
     }
 }
