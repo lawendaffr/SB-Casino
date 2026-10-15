@@ -1,6 +1,7 @@
 package me.polonium.kasynobackend.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="users")
@@ -12,6 +13,9 @@ public class User {
     @Column(nullable=false,unique = true,length = 50)
     private String username;
 
+    @Column(length = 254)
+    private String email;
+
     @Column(name="password_hash",nullable = false)
     private String passwordHash;
 
@@ -21,6 +25,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private UserRole role;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "account_status", nullable = false, length = 20)
+    private AccountStatus accountStatus = AccountStatus.ACTIVE;
+
+    @Column(name = "suspended_until")
+    private LocalDateTime suspendedUntil;
 
 
 
@@ -35,6 +46,9 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     public void setUsername(String username) {
         this.username = username;
@@ -62,5 +76,13 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public AccountStatus getAccountStatus() { return accountStatus; }
+    public void setAccountStatus(AccountStatus accountStatus) { this.accountStatus = accountStatus; }
+    public LocalDateTime getSuspendedUntil() { return suspendedUntil; }
+    public void setSuspendedUntil(LocalDateTime suspendedUntil) { this.suspendedUntil = suspendedUntil; }
+    public boolean isRestrictedAt(LocalDateTime now) {
+        return accountStatus == AccountStatus.BANNED || (suspendedUntil != null && suspendedUntil.isAfter(now));
     }
 }
