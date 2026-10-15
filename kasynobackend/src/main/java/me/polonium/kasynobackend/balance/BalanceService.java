@@ -82,6 +82,18 @@ public class BalanceService {
     }
 
     @Transactional
+    public long adjustBalance(long userId, long adjustment, String description) {
+        if (adjustment == 0 || adjustment == Long.MIN_VALUE) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Adjustment must be non-zero and within the supported range");
+        }
+        if (adjustment > 0) {
+            return addBalance(userId, adjustment, TransactionType.ADMIN_ADJUSTMENT, description);
+        }
+        return subtractBalance(userId, -adjustment, TransactionType.ADMIN_ADJUSTMENT, description);
+    }
+
+    @Transactional
     public long getBalance(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() ->
