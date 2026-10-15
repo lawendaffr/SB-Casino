@@ -1,4 +1,6 @@
 package me.polonium.kasynobackend.entity;
 
-public class BlackjackStatus {
+public enum BlackjackStatus {
+    ACTIVE,
+    FINISHED
 }
