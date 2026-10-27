@@ -34,6 +34,13 @@ public class SecurityConfig {
                                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                         ))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/", "/login", "/dashboard", "/blackjack", "/history", "/deposit",
+                                "/index.html", "/login.html", "/dashboard.html",
+                                "/blackjack.html", "/history.html", "/deposit.html",
+                                "/css/**", "/js/**", "/components/**", "/images/**",
+                                "/favicon.ico"
+                        ).permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/test/**").permitAll()
                         .requestMatchers("/error").permitAll()

@@ -1,5 +1,5 @@
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "";
 
 let refreshPromise = null;
 
@@ -74,7 +74,7 @@ async function apiRequest(path, options = {}, retry = true) {
         } catch {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-            window.location.href = "login.html";
+            window.location.href = "/login";
             throw new Error("Your session expired. Please log in again.");
         }
     }

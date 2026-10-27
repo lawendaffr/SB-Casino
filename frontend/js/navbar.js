@@ -1,10 +1,11 @@
 
 async function loadNavbar() {
     const navbarContainer = document.getElementById("navbar");
+
     if (!navbarContainer) return;
 
     try {
-        const response = await fetch("components/navbar.html");
+        const response = await fetch("/components/navbar.html");
 
         if (!response.ok) {
             throw new Error("Failed to load navbar");
@@ -25,6 +26,7 @@ async function loadNavbar() {
         document
             .getElementById("logout-button")
             .addEventListener("click", logout);
+
     } catch (error) {
         console.error("Navbar error:", error);
     }
@@ -46,7 +48,7 @@ async function logout() {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
 
-        window.location.href = "index.html";
+        window.location.href = "/";
     }
 }
 

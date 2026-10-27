@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game History - SB-Casino</title>
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <main>
+        <h1>Game History</h1>
+
+        <button id="refresh-games">Refresh</button>
+
+        <p id="games-message">Loading games...</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Game</th>
+                    <th>Status</th>
+                    <th>Bet</th>
+                    <th>Payout</th>
+                    <th>Net Result</th>
+                    <th>Result</th>
+                    <th>Started</th>
+                    <th>Finished</th>
+                </tr>
+            </thead>
+            <tbody id="games-list"></tbody>
+        </table>
+
+        <p id="page-info"></p>
+
+        <button id="previous-page" disabled>Previous</button>
+        <button id="next-page" disabled>Next</button>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>

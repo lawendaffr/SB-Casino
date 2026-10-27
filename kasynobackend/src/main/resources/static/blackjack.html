@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack - SB-Casino</title>
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <main>
+        <h1>Blackjack</h1>
+
+        <section>
+            <h2>Start a Round</h2>
+            <p>Your balance: <strong id="balance">Loading...</strong> credits</p>
+
+            <form id="start-form">
+                <label for="bet">Bet:</label>
+                <input
+                    type="number"
+                    id="bet"
+                    min="1"
+                    max="1000000"
+                    step="1"
+                    value="100"
+                    required
+                >
+                <button type="submit" id="start-button">Start Game</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Game</h2>
+            <p id="game-message">Start a round to play.</p>
+
+            <h3>Dealer</h3>
+            <p>Cards: <span id="dealer-cards">-</span></p>
+            <p>Total: <span id="dealer-total">-</span></p>
+
+            <h3>You</h3>
+            <p>Cards: <span id="player-cards">-</span></p>
+            <p>Total: <span id="player-total">-</span></p>
+
+            <p>Bet: <span id="current-bet">-</span></p>
+            <p>Payout: <span id="payout">-</span></p>
+            <p>Result: <strong id="result">-</strong></p>
+            <p>Balance after action: <span id="game-balance">-</span></p>
+
+            <button id="hit-button" disabled>Hit</button>
+            <button id="stand-button" disabled>Stand</button>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/blackjack.js"></script>
+</body>
+</html>
