@@ -375,6 +375,72 @@ Invalid pagination values receive `400 Bad Request`.
 
 `GET /api/users/leaderboard?page=0&size=20` is available to authenticated users. It is paginated and ranks users by completed-game net result, highest first.
 
+## Games and gameplay
+
+### List enabled games
+
+`GET /api/games` returns the currently enabled games and their configured maximum bets:
+
+```json
+[
+  {
+    "gameType": "BLACKJACK",
+    "enabled": true,
+    "maxBet": 1000000,
+    "updatedAt": "2026-10-14T13:10:00"
+  }
+]
+```
+
+### Blackjack
+
+Start a round with `POST /api/games/blackjack/start`:
+
+```http
+POST /api/games/blackjack/start
+Authorization: Bearer <access-token>
+Content-Type: application/json
+```
+
+```json
+{"bet":100}
+```
+
+The bet must be at least 1 credit, within the configured game maximum (currently capped at 1,000,000 credits), and affordable from the player's balance. Starting a round deducts the bet and creates an active game-history record. A natural Blackjack can finish the round immediately.
+
+To continue an active round, send `POST /api/games/blackjack/{gameId}/action` with one action:
+
+```json
+{"action":"HIT"}
+```
+
+or
+
+```json
+{"action":"STAND"}
+```
+
+Both endpoints return the existing Blackjack response shape:
+
+```json
+{
+  "gameId": 42,
+  "status": "ACTIVE",
+  "playerCards": ["10-SPADES", "7-HEARTS"],
+  "dealerCards": ["9-CLUBS"],
+  "playerTotal": 17,
+  "dealerTotal": null,
+  "bet": 100,
+  "payout": 0,
+  "result": "IN_PROGRESS",
+  "balance": 900
+}
+```
+
+While the round is active, only the dealer's first card is shown and `dealerTotal` is `null`. Once the round finishes, the response reveals the dealer's cards and total. A completed round settles the balance and updates the same game-history record.
+
+Invalid or unaffordable bets return `400 Bad Request`. A missing game or a game belonging to another user returns `404 Not Found`. Sending an action to a finished round returns `409 Conflict`.
+
 ## Moderation reports
 
 `GET /api/moderation/reports` is available to moderators and admins. It summarizes user count and active/completed game counts, total bets, payouts, and net result. Monetary totals use completed shared game records.
