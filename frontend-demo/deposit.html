@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redeem Code - SB-Casino</title>
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <main>
+        <h1>Redeem Credit Code</h1>
+
+        <section>
+            <h2>Your Balance</h2>
+            <p><strong id="balance">Loading...</strong> credits</p>
+            <button id="refresh-balance">Refresh Balance</button>
+        </section>
+
+        <section>
+            <h2>Enter Your Code</h2>
+
+            <form id="redeem-form">
+                <label for="code">Redemption code:</label>
+                <input
+                    type="text"
+                    id="code"
+                    name="code"
+                    placeholder="AB12-CD34"
+                    maxlength="100"
+                    required
+                >
+                <button type="submit" id="redeem-button">
+                    Redeem
+                </button>
+            </form>
+
+            <p id="redeem-message" role="status"></p>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/deposit.js"></script>
+</body>
+</html>
