@@ -1,8 +1,9 @@
-
 async function loadNavbar() {
-    const container = document.getElementById("navbar-container");
+    const navbarContainer = document.getElementById("navbar");
 
-    if (!container) return;
+    if (!navbarContainer) {
+        return;
+    }
 
     try {
         const response = await fetch("components/navbar.html");
@@ -11,25 +12,47 @@ async function loadNavbar() {
             throw new Error("Failed to load navbar");
         }
 
-        container.innerHTML = await response.text();
+        navbarContainer.innerHTML = await response.text();
 
-        const authContainer = document.getElementById("navbar-auth");
-        const token = localStorage.getItem("token");
+        const accessToken = localStorage.getItem("accessToken");
+        const loggedIn = Boolean(accessToken);
 
-        if (token && authContainer) {
-            authContainer.innerHTML = `
-                <a href="dashboard.html">My Account</a>
-                <button id="logout-button">Logout</button>
-            `;
+        document.getElementById("login-link").hidden = loggedIn;
+        document.getElementById("logout-button").hidden = !loggedIn;
 
-            document.getElementById("logout-button")
-                .addEventListener("click", () => {
-                    localStorage.removeItem("token");
-                    window.location.href = "index.html";
-                });
-        }
+        document.getElementById("dashboard-link").hidden = !loggedIn;
+        document.getElementById("blackjack-link").hidden = !loggedIn;
+        document.getElementById("history-link").hidden = !loggedIn;
+        document.getElementById("deposit-link").hidden = !loggedIn;
+
+        document
+            .getElementById("logout-button")
+            .addEventListener("click", logout);
+
     } catch (error) {
         console.error("Navbar error:", error);
+    }
+}
+
+async function logout() {
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    try {
+        if (refreshToken) {
+            await apiRequest("/api/auth/logout", {
+                method: "POST",
+                body: JSON.stringify({
+                    refreshToken: refreshToken
+                })
+            });
+        }
+    } catch (error) {
+        console.error("Logout request failed:", error);
+    } finally {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+
+        window.location.href = "index.html";
     }
 }
 
