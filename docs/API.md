@@ -256,11 +256,58 @@ Authenticated users without sufficient permissions receive:
 
 ---
 
-# Game History
+# User endpoints
+
+The following endpoints require an access token in the `Authorization: Bearer <access-token>` header unless the endpoint is explicitly marked public.
+
+## Current user and balance
+
+`GET /api/users/me` returns the signed-in user's ID, username, and current credit balance:
+
+```http
+GET /api/users/me
+Authorization: Bearer <access-token>
+```
+
+```json
+{
+  "id": 12,
+  "username": "player1",
+  "balance": 1000
+}
+```
+
+`GET /api/users/me/balance` returns just the current balance:
+
+```json
+{
+  "balance": 1000
+}
+```
+
+Both endpoints return data for the authenticated user; the client does not send a user ID.
+
+## Transaction history
+
+`GET /api/users/me/transactions` returns the signed-in user's balance transactions, newest first. Amounts are non-negative; use `type`, `balanceBefore`, and `balanceAfter` to understand whether the transaction added or removed credits.
+
+```json
+[
+  {
+    "id": 81,
+    "type": "GAME_BET",
+    "amount": 100,
+    "balanceBefore": 1000,
+    "balanceAfter": 900,
+    "description": "BLACKJACK bet",
+    "createdAt": "2026-10-14T13:10:00"
+  }
+]
+```
 
 ## Account management
 
-* `GET /api/users/me/account` returns the current username and email.
+* `GET /api/users/me/account` returns the current username and email (use `GET /api/users/me` when you also need the balance).
 * `PATCH /api/users/me/account` can update `username`, `email`, or `newPassword`. To change a password, send `currentPassword` and `newPassword` together. Changing the password revokes refresh tokens.
 * `DELETE /api/users/me` permanently deletes the account and its balance transactions, game history, and refresh tokens. Send `{"currentPassword":"..."}` to confirm. The final admin account cannot delete itself.
 * `GET /api/users/me/moderation-actions?page=0&size=20` shows warnings and other moderation actions on the current account.
