@@ -2,6 +2,7 @@ package me.polonium.kasynobackend.repository;
 
 import jakarta.persistence.LockModeType;
 import me.polonium.kasynobackend.entity.BlackjackGame;
+import me.polonium.kasynobackend.entity.BlackjackStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,9 @@ public interface BlackjackGameRepository
             @Param("gameId") Long gameId,
             @Param("userId") Long userId
     );
+
+    boolean existsByUserIdAndStatus(Long userId, BlackjackStatus status);
+
+    Optional<BlackjackGame> findFirstByUserIdAndStatusOrderByIdDesc(Long userId,
+                                                                    BlackjackStatus status);
 }

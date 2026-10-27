@@ -133,15 +133,33 @@ standButton.addEventListener("click", () => {
     performAction("STAND");
 });
 
-// Load the player's current balance when the page opens.
+async function loadGame() {
+    try {
+        const game = await apiRequest("/api/games/blackjack/active");
+        displayGame(game);
+    } catch (error) {
+        // 404 means the player has no active round.
+        if (error.status === 404) {
+            setGameControls(false);
+            gameMessage.textContent = "No active round. Start a new game.";
+            await loadBalance();
+            return;
+        }
+
+        gameMessage.textContent =
+            "Could not restore active game: " + error.message;
+
+        await loadBalance();
+    }
+}
+
 async function loadBalance() {
     try {
         const data = await apiRequest("/api/users/me/balance");
         balanceElement.textContent = data.balance;
     } catch (error) {
         balanceElement.textContent = "Unavailable";
-        gameMessage.textContent = "Could not load balance: " + error.message;
     }
 }
 
-loadBalance();
+loadGame();

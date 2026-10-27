@@ -27,6 +27,12 @@ public class BlackjackController {
         return blackjackService.start(userId, request.bet());
     }
 
+    @GetMapping("/active")
+    public BlackjackGameResponse getActive(Authentication authentication) {
+        Long userId = (Long) authentication.getPrincipal();
+        return blackjackService.getActive(userId);
+    }
+
     @PostMapping("/{gameId}/action")
     public BlackjackGameResponse act(
             @PathVariable Long gameId,

@@ -52,7 +52,17 @@ public class BlackjackService {
 
     @Transactional
     public BlackjackGameResponse start(Long userId, long bet) {
+        if (gameRepository.existsByUserIdAndStatus(userId, BlackjackStatus.ACTIVE)) {
+            throw activeRoundConflict();
+        }
+
         GameRecord record = gameOperations.start(userId, "BLACKJACK", bet, MAX_BET);
+
+        // GameOperations.start debits under a user row lock. Checking after that
+        // lock serializes simultaneous starts for the same player.
+        if (gameRepository.existsByUserIdAndStatus(userId, BlackjackStatus.ACTIVE)) {
+            throw activeRoundConflict();
+        }
 
         List<String> deck = createDeck();
         Collections.shuffle(deck, random);
@@ -88,6 +98,21 @@ public class BlackjackService {
 
         gameRepository.saveAndFlush(game);
 
+        return toResponse(game, userId);
+    }
+
+    private ResponseStatusException activeRoundConflict() {
+        return new ResponseStatusException(HttpStatus.CONFLICT,
+                "Finish your active Blackjack game before starting another");
+    }
+
+    @Transactional(readOnly = true)
+    public BlackjackGameResponse getActive(Long userId) {
+        BlackjackGame game = gameRepository
+                .findFirstByUserIdAndStatusOrderByIdDesc(userId, BlackjackStatus.ACTIVE)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "No active Blackjack game"
+                ));
         return toResponse(game, userId);
     }
 

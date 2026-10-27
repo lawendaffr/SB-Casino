@@ -394,6 +394,15 @@ Invalid pagination values receive `400 Bad Request`.
 
 ### Blackjack
 
+Retrieve the player's active round after opening or refreshing the game page:
+
+```http
+GET /api/games/blackjack/active
+Authorization: Bearer <access-token>
+```
+
+This returns the same response shape as the start and action endpoints, including the game ID, cards visible to the player, current status, bet, payout, result, and balance. A player can have only one active Blackjack round at a time. If there is no active round, this endpoint returns `404 Not Found`; starting another round while one is active returns `409 Conflict`.
+
 Start a round with `POST /api/games/blackjack/start`:
 
 ```http
@@ -439,7 +448,7 @@ Both endpoints return the existing Blackjack response shape:
 
 While the round is active, only the dealer's first card is shown and `dealerTotal` is `null`. Once the round finishes, the response reveals the dealer's cards and total. A completed round settles the balance and updates the same game-history record.
 
-Invalid or unaffordable bets return `400 Bad Request`. A missing game or a game belonging to another user returns `404 Not Found`. Sending an action to a finished round returns `409 Conflict`.
+Invalid or unaffordable bets return `400 Bad Request`. A missing game or a game belonging to another user returns `404 Not Found`. Sending an action to a finished round or starting a second round while one is active returns `409 Conflict`.
 
 ## Moderation reports
 
@@ -459,12 +468,63 @@ These endpoints require the `ADMIN` role:
 * `PATCH /api/admin/users/{userId}/balance` adjusts a balance. Send a signed non-zero `amount` and optional reason, for example `{"amount": 250, "reason": "Support correction"}`. Negative adjustments cannot reduce a balance below zero.
 * `PATCH /api/admin/users/{userId}/role` changes a role, for example `{"role": "MODERATOR"}`.
 * `GET /api/admin/logs?page=0&size=20` lists audited staff actions.
-* `GET /api/admin/codes?page=0&size=20` lists deposit codes; existing create and deactivate endpoints remain available.
+* Deposit and credit codes are managed at `/api/admin/codes` (details below).
 * `GET /api/admin/games` lists configured games. `PATCH /api/admin/games/{gameType}` updates availability and maximum bet, for example `{"enabled":false,"maxBet":100000}`. The current Blackjack maximum is capped at 1,000,000 credits.
 
 Players can see currently enabled games at `GET /api/games`.
 
 Paginated endpoints use page zero by default and accept sizes from 1 to 100. API errors use a JSON object with `timestamp`, `status`, `error`, `message`, and `path` fields.
+
+## Deposit and credit codes
+
+Players redeem an issued code with `POST /api/codes/redeem`:
+
+```http
+POST /api/codes/redeem
+Authorization: Bearer <access-token>
+Content-Type: application/json
+```
+
+```json
+{"code":"AB12-CD34"}
+```
+
+The code is case-insensitive and whitespace around it is ignored. A successful redemption adds the code's credit amount to the player's balance, records a deposit transaction, and returns:
+
+```json
+{
+  "code": "AB12-CD34",
+  "amount": 500,
+  "balance": 1500
+}
+```
+
+Each player can redeem a particular code only once. An unknown code returns `404 Not Found`; a missing code, inactive code, or expired code returns `400 Bad Request`; a previously redeemed code or exhausted usage limit returns `409 Conflict`.
+
+Admins manage codes at `/api/admin/codes`:
+
+* `POST /api/admin/codes` creates a code. Send `amount` (1 to 1,000,000,000 credits), `redemptionPolicy`, optional `maxUses`, and optional future `expiresAt`.
+* `GET /api/admin/codes?page=0&size=20` lists codes newest first.
+* `POST /api/admin/codes/{code}/deactivate` disables a code so it can no longer be redeemed.
+
+Create request example:
+
+```json
+{
+  "amount": 500,
+  "redemptionPolicy": "LIMITED_USES",
+  "maxUses": 100,
+  "expiresAt": "2027-01-01T00:00:00"
+}
+```
+
+`redemptionPolicy` must be one of:
+
+* `ONCE_TOTAL`: redeemable once overall; `maxUses` is set to 1 automatically.
+* `ONCE_PER_USER`: each player may redeem once. Omit `maxUses` for unlimited total redemptions, or set it to cap the total number of uses.
+* `LIMITED_USES`: requires a positive `maxUses` value.
+
+Omit `expiresAt` for a code that does not expire. The create and deactivate endpoints return the code, amount, policy, usage limit, expiration, active flag, and creation timestamp. Invalid amounts, policies, limits, or expiration times return `400 Bad Request`. Admin endpoints require the `ADMIN` role.
 
 ---
 
