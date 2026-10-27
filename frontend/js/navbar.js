@@ -1,9 +1,7 @@
+
 async function loadNavbar() {
     const navbarContainer = document.getElementById("navbar");
-
-    if (!navbarContainer) {
-        return;
-    }
+    if (!navbarContainer) return;
 
     try {
         const response = await fetch("components/navbar.html");
@@ -14,8 +12,7 @@ async function loadNavbar() {
 
         navbarContainer.innerHTML = await response.text();
 
-        const accessToken = localStorage.getItem("accessToken");
-        const loggedIn = Boolean(accessToken);
+        const loggedIn = Boolean(localStorage.getItem("accessToken"));
 
         document.getElementById("login-link").hidden = loggedIn;
         document.getElementById("logout-button").hidden = !loggedIn;
@@ -28,7 +25,6 @@ async function loadNavbar() {
         document
             .getElementById("logout-button")
             .addEventListener("click", logout);
-
     } catch (error) {
         console.error("Navbar error:", error);
     }
@@ -41,9 +37,7 @@ async function logout() {
         if (refreshToken) {
             await apiRequest("/api/auth/logout", {
                 method: "POST",
-                body: JSON.stringify({
-                    refreshToken: refreshToken
-                })
+                body: JSON.stringify({ refreshToken })
             });
         }
     } catch (error) {
