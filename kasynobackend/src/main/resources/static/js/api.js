@@ -1,5 +1,5 @@
 
-const API_BASE_URL = window.API_BASE_URL || (window.location.port === "5500" ? `http://${window.location.hostname || "localhost"}:8080` : "");
+const API_BASE_URL = ""
 
 let refreshPromise = null;
 
