@@ -11,12 +11,16 @@
 
 git clone ...
 cd SB-Casino
+### 2. Create .env
+copy .env.example
+rename to .env
+change values to your liking
 
-### 2. Start app
+### 3. Start app
 
 docker compose up --build -d
 
-### 3. View app
+### 4. View app
 
 localhost:8080  
 
