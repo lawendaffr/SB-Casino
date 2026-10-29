@@ -32,7 +32,7 @@ loginForm.addEventListener("submit", async (event) => {
         localStorage.setItem("accessToken", result.accessToken);
         localStorage.setItem("refreshToken", result.refreshToken);
 
-        window.location.href = "/dashboard";
+        window.location.href = "dashboard.html";
     } catch (error) {
         authMessage.textContent = error.message;
     }
