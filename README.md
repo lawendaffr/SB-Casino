@@ -3,8 +3,6 @@
 ## Requirements
 
 - Git
-- JDK 21
-- Node.js
 - Docker Desktop
 
 ## Setup
@@ -14,20 +12,12 @@
 git clone ...
 cd SB-Casino
 
-### 2. Start PostgreSQL
+### 2. Start app
 
-docker compose up -d
+docker compose up --build -d
 
-### 3. Start backend
+### 3. View app
 
-cd kasynobackend
-./mvnw spring-boot:run
+localhost:8080  
 
-Windows:
-.\mvnw.cmd spring-boot:run
-
-### 4. Start frontend
-
-cd frontend
-npm install
-npm run dev
+happi
