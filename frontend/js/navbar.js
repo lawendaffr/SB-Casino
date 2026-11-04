@@ -34,8 +34,15 @@ function toggleTheme() {
 // Apply saved/default theme immediately to avoid flash of unstyled theme
 applyTheme(getPreferredTheme());
 
+function updatePageLinks(root = document) {
+    root.querySelectorAll('a[href^="/"]').forEach(link => {
+        link.href = window.appRoute(link.getAttribute("href"));
+    });
+}
+
 async function loadNavbar() {
     await window.apiReady;
+    updatePageLinks();
     applyTheme(getPreferredTheme());
 
     const navbarContainer = document.getElementById("navbar");
@@ -46,24 +53,26 @@ async function loadNavbar() {
                 throw new Error("Failed to load navbar");
             }
             navbarContainer.innerHTML = await response.text();
+            updatePageLinks(navbarContainer);
         } catch (error) {
             console.warn("Falling back to inline navbar:", error);
             navbarContainer.innerHTML = `
                 <nav id="main-navbar">
-                    <a href="index.html">SB-Casino</a>
-                    <a href="index.html">Home</a>
+                    <a href="/">SB-Casino</a>
+                    <a href="/">Home</a>
 
-                    <a href="dashboard.html" id="dashboard-link" hidden>Dashboard</a>
-                    <a href="blackjack.html" id="blackjack-link" hidden>Blackjack</a>
-                    <a href="history.html" id="history-link" hidden>Game History</a>
-                    <a href="deposit.html" id="deposit-link" hidden>Redeem Code</a>
+                    <a href="/dashboard" id="dashboard-link" hidden>Dashboard</a>
+                    <a href="/blackjack" id="blackjack-link" hidden>Blackjack</a>
+                    <a href="/history" id="history-link" hidden>Game History</a>
+                    <a href="/deposit" id="deposit-link" hidden>Redeem Code</a>
 
                     <button type="button" id="theme-toggle">Theme: Onyx</button>
-                    <a href="login.html" id="login-link">Login / Register</a>
+                    <a href="/login" id="login-link">Login / Register</a>
                     <button type="button" id="logout-button" hidden>Logout</button>
                 </nav>
                 <hr>
             `;
+            updatePageLinks(navbarContainer);
         }
 
         const loggedIn = Boolean(localStorage.getItem("accessToken"));
@@ -126,7 +135,7 @@ async function logout() {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
 
-        window.location.href = "index.html";
+        window.location.href = window.appRoute("/");
     }
 }
 

@@ -13,6 +13,18 @@ if (["live", "mock"].includes(apiModeOverride)) {
 }
 
 const API_MODE = localStorage.getItem(API_MODE_KEY) || "live";
+const STATIC_ROUTES = {
+    "/": "/index.html",
+    "/login": "/login.html",
+    "/dashboard": "/dashboard.html",
+    "/blackjack": "/blackjack.html",
+    "/history": "/history.html",
+    "/deposit": "/deposit.html"
+};
+window.appRoute = path =>
+    API_MODE === "mock" && window.location.port === "5500"
+        ? STATIC_ROUTES[path] || path
+        : path;
 const mockAdapter = API_MODE === "mock" ? import("./api.mock.js") : null;
 window.apiReady = mockAdapter
     ? mockAdapter.then(adapter => adapter.initialize())
@@ -96,7 +108,7 @@ async function apiRequest(path, options = {}, retry = true) {
         } catch {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-            window.location.href = "login.html";
+            window.location.href = window.appRoute("/login");
             throw new Error("Your session expired. Please log in again.");
         }
     }

@@ -3,48 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SB-Casino - Home</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <meta name="theme-color" content="#111217">
+    <title>SB-Casino — Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Urbanist:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-
+<body class="home-page">
     <div id="navbar-container"></div>
 
-    <main>
-        <h1>Welcome to SB-Casino</h1>
+    <main class="home-shell">
+        <header class="home-welcome">
+            <div>
+                <p class="section-eyebrow">SB-CASINO / HOME</p>
+                <h1>Welcome to SB-Casino</h1>
+                <p class="welcome-description">Browse the current games and upcoming titles.</p>
+            </div>
+            <div class="welcome-actions">
+                <a class="welcome-primary" href="#games">View games <span aria-hidden="true">↓</span></a>
+                <a class="welcome-secondary" href="/login">Create an account</a>
+            </div>
+            <div class="welcome-mark" aria-hidden="true"><span>SB</span></div>
+        </header>
 
-        <p>
-            Play skill-based games, test your strategy,
-            and track your results.
-        </p>
+        <section class="games-section" id="games" aria-labelledby="games-title">
+            <header class="games-heading">
+                <div><p class="section-eyebrow">LOBBY</p><h2 id="games-title">Games</h2></div>
+                <p class="games-count"><span></span> 1 available <b>/</b> 4 coming soon</p>
+            </header>
+            <div class="game-grid">
+                <a class="game-tile game-tile-playable" href="/blackjack">
+                    <div class="game-art art-blackjack" aria-hidden="true">
+                        <span class="art-glow"></span>
+                        <span class="art-symbol">21</span>
+                        <span class="art-suit">♠</span>
+                        <span class="art-label">BLACKJACK</span>
+                    </div>
+                    <div class="game-tile-meta">
+                        <div><h2>Blackjack</h2><p>Cards</p></div>
+                        <span class="game-launch" aria-hidden="true">↗</span>
+                    </div>
+                </a>
 
-        <a href="login.html">Get Started</a>
-        <a href="blackjack.html">Play Blackjack</a>
+                <article class="game-tile game-tile-soon">
+                    <div class="game-art art-violet" aria-hidden="true"><span class="placeholder-number">02</span><span class="placeholder-status">COMING SOON</span></div>
+                    <div class="game-tile-meta"><div><h2>Coming soon</h2><p>02</p></div><span class="soon-dot" aria-hidden="true"></span></div>
+                </article>
 
-        <section>
-            <h2>Available Games</h2>
+                <article class="game-tile game-tile-soon">
+                    <div class="game-art art-coral" aria-hidden="true"><span class="placeholder-number">03</span><span class="placeholder-status">COMING SOON</span></div>
+                    <div class="game-tile-meta"><div><h2>Coming soon</h2><p>03</p></div><span class="soon-dot" aria-hidden="true"></span></div>
+                </article>
 
-            <article>
-                <h3>Blackjack</h3>
-                <p>
-                    Test your decisions against the dealer
-                    in a classic card game.
-                </p>
-                <a href="blackjack.html">Play Blackjack</a>
-            </article>
-        </section>
+                <article class="game-tile game-tile-soon">
+                    <div class="game-art art-cyan" aria-hidden="true"><span class="placeholder-number">04</span><span class="placeholder-status">COMING SOON</span></div>
+                    <div class="game-tile-meta"><div><h2>Coming soon</h2><p>04</p></div><span class="soon-dot" aria-hidden="true"></span></div>
+                </article>
 
-        <section>
-            <h2>Your Progress</h2>
-            <p>
-                Log in to view your balance,
-                transactions, and game history.
-            </p>
-            <a href="dashboard.html">Open Dashboard</a>
+                <article class="game-tile game-tile-soon">
+                    <div class="game-art art-blue" aria-hidden="true"><span class="placeholder-number">05</span><span class="placeholder-status">COMING SOON</span></div>
+                    <div class="game-tile-meta"><div><h2>Coming soon</h2><p>05</p></div><span class="soon-dot" aria-hidden="true"></span></div>
+                </article>
+            </div>
         </section>
     </main>
 
-    <script src="js/api.js"></script>
-    <script src="js/navbar.js"></script>
+    <footer class="site-footer">
+        <span>SB-CASINO</span>
+        <span>© 2026 SB-Casino. All rights reserved.</span>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/navbar.js"></script>
 </body>
 </html>
