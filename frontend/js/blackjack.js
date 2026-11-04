@@ -20,12 +20,75 @@ let currentGameId = null;
 let gameActive = false;
 let actionInProgress = false;
 
-function displayCards(cards) {
-    if (!cards || cards.length === 0) {
-        return "-";
+const CARD_SUITS = {
+    SPADES: "♠",
+    CLUBS: "♣",
+    HEARTS: "♥",
+    DIAMONDS: "♦"
+};
+const WINNING_RESULTS = new Set(["PLAYER_WIN", "PLAYER_BLACKJACK"]);
+
+function isWinningResult(result) {
+    return WINNING_RESULTS.has(String(result || "").toUpperCase());
+}
+
+function celebrateWin(gamePanel) {
+    gamePanel.querySelector(".win-celebration")?.remove();
+    const celebration = document.createElement("div");
+    celebration.className = "win-celebration";
+    celebration.setAttribute("aria-hidden", "true");
+    const colors = ["#8fffe0", "#7bd4ff", "#ffe17b", "#ff8fb8", "#c9a2ff", "#ffffff"];
+
+    for (let index = 0; index < 28; index++) {
+        const piece = document.createElement("i");
+        piece.className = "win-confetti";
+        piece.style.setProperty("--x", `${Math.random() * 100}%`);
+        piece.style.setProperty("--fall", `${950 + Math.random() * 700}ms`);
+        piece.style.setProperty("--delay", `${Math.random() * 260}ms`);
+        piece.style.setProperty("--drift", `${Math.floor(Math.random() * 120) - 60}px`);
+        piece.style.setProperty("--spin", `${Math.floor(Math.random() * 1000) - 500}deg`);
+        piece.style.setProperty("--particle-color", colors[index % colors.length]);
+        celebration.appendChild(piece);
     }
 
-    return cards.join(", ");
+    gamePanel.appendChild(celebration);
+    window.setTimeout(() => celebration.remove(), 2100);
+}
+
+function renderCards(container, cards) {
+    container.replaceChildren();
+
+    if (!cards || cards.length === 0) {
+        const empty = document.createElement("span");
+        empty.className = "empty-card-slot";
+        empty.textContent = "Cards are dealt here";
+        container.appendChild(empty);
+        return;
+    }
+
+    for (const value of cards) {
+        const [rank, suit] = String(value).split("-");
+        const symbol = CARD_SUITS[suit] || "•";
+        const card = document.createElement("span");
+        card.className = `playing-card${suit === "HEARTS" || suit === "DIAMONDS" ? " card-red" : ""}`;
+        card.setAttribute("role", "img");
+        card.setAttribute("aria-label", `${rank} of ${String(suit || "unknown").toLowerCase()}`);
+
+        const top = document.createElement("span");
+        top.className = "card-index";
+        top.textContent = rank;
+
+        const center = document.createElement("span");
+        center.className = "card-suit";
+        center.textContent = symbol;
+
+        const bottom = document.createElement("span");
+        bottom.className = "card-index card-index-bottom";
+        bottom.textContent = rank;
+
+        card.append(top, center, bottom);
+        container.appendChild(card);
+    }
 }
 
 function displayTotal(total) {
@@ -43,26 +106,71 @@ function setGameControls(active) {
 
 function displayGame(game) {
     currentGameId = game.gameId;
+    document.querySelector(".game-panel .win-celebration")?.remove();
 
-    dealerCardsElement.textContent = displayCards(game.dealerCards);
+    renderCards(dealerCardsElement, game.dealerCards);
+    if (game.status === "ACTIVE") {
+        const hiddenCard = document.createElement("span");
+        hiddenCard.className = "playing-card card-face-down";
+        hiddenCard.setAttribute("aria-label", "Face-down dealer card");
+        hiddenCard.textContent = "SB";
+        dealerCardsElement.appendChild(hiddenCard);
+    }
     dealerTotalElement.textContent = displayTotal(game.dealerTotal);
 
-    playerCardsElement.textContent = displayCards(game.playerCards);
+    renderCards(playerCardsElement, game.playerCards);
     playerTotalElement.textContent = displayTotal(game.playerTotal);
 
     currentBetElement.textContent = game.bet;
     payoutElement.textContent = game.payout;
-    resultElement.textContent = game.result;
+    const resultLabels = {
+        PLAYER_WIN: "You win",
+        PLAYER_BLACKJACK: "Blackjack!",
+        DEALER_BLACKJACK: "Dealer blackjack",
+        DEALER_WIN: "Dealer wins",
+        PLAYER_BUST: "Bust",
+        PUSH: "Push",
+        IN_PROGRESS: "In progress"
+    };
+    resultElement.textContent = resultLabels[game.result] || game.result || "-";
     gameBalanceElement.textContent = game.balance;
     balanceElement.textContent = game.balance;
+    window.updatePlayerBalance?.(game.balance);
 
     const active = game.status === "ACTIVE";
     setGameControls(active);
 
+    const outcomeClasses = ["outcome-win", "outcome-loss", "outcome-push"];
+    const gamePanel = document.querySelector(".game-panel");
+    gamePanel.classList.remove(...outcomeClasses);
+    resultElement.classList.remove("amount-positive", "amount-negative", "amount-neutral");
+    if (!active) {
+        const outcome = String(game.result || "").toUpperCase();
+        const won = isWinningResult(outcome);
+        const outcomeClass = won
+            ? "outcome-win"
+            : outcome === "PUSH" ? "outcome-push" : "outcome-loss";
+        const amountClass = won
+            ? "amount-positive"
+            : outcome === "PUSH" ? "amount-neutral" : "amount-negative";
+        void gamePanel.offsetWidth;
+        gamePanel.classList.add(outcomeClass);
+        resultElement.classList.add(amountClass);
+        if (won) celebrateWin(gamePanel);
+    }
+
+    gameMessage.classList.remove("amount-positive", "amount-negative", "amount-neutral");
     if (active) {
         gameMessage.textContent = "Round in progress. Choose Hit or Stand.";
+    } else if (isWinningResult(game.result)) {
+        gameMessage.textContent = game.result === "PLAYER_BLACKJACK" ? "Blackjack! You won this round." : "You won this round.";
+        gameMessage.classList.add("amount-positive");
+    } else if (game.result === "PUSH") {
+        gameMessage.textContent = "Push. Your bet is returned.";
+        gameMessage.classList.add("amount-neutral");
     } else {
-        gameMessage.textContent = "Round finished.";
+        gameMessage.textContent = "Round lost.";
+        gameMessage.classList.add("amount-negative");
     }
 }
 
@@ -157,6 +265,7 @@ async function loadBalance() {
     try {
         const data = await apiRequest("/api/users/me/balance");
         balanceElement.textContent = data.balance;
+        window.updatePlayerBalance?.(data.balance);
     } catch (error) {
         balanceElement.textContent = "Unavailable";
     }

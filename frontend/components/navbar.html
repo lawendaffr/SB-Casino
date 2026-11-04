@@ -1,14 +1,34 @@
-<nav id="main-navbar">
-    <a href="/">SB-Casino</a>
-    <a href="/">Home</a>
+<div class="nav-shell">
+    <nav id="main-navbar" aria-label="Main navigation">
+        <a class="nav-home" href="/">SB-Casino</a>
+        <div class="player-summary" id="player-summary">
+            <a class="player-profile-link" id="player-profile-link" href="/dashboard" aria-label="Open player dashboard">
+                <span class="player-avatar" id="player-avatar" aria-hidden="true">G</span>
+                <span class="player-name" id="player-name">Guest</span>
+            </a>
+            <span class="player-balance" id="player-balance" hidden>— credits</span>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-controls="side-menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
 
-    <a href="/dashboard" id="dashboard-link" hidden>Dashboard</a>
-    <a href="/blackjack" id="blackjack-link" hidden>Blackjack</a>
-    <a href="/history" id="history-link" hidden>Game History</a>
-    <a href="/deposit" id="deposit-link" hidden>Redeem Code</a>
-
-    <button type="button" id="theme-toggle">Theme: Onyx</button>
-    <a href="/login" id="login-link">Login / Register</a>
-    <button type="button" id="logout-button" hidden>Logout</button>
-</nav>
-<hr>
+    <button id="menu-backdrop" class="menu-backdrop" type="button" aria-label="Close menu" hidden></button>
+    <aside id="side-menu" class="side-menu" aria-label="Site menu" aria-hidden="true" hidden>
+        <div class="side-menu-heading">
+            <div><p class="menu-eyebrow">SB-CASINO</p><h2>Menu</h2></div>
+            <button id="menu-close" class="menu-close" type="button" aria-label="Close menu">×</button>
+        </div>
+        <nav class="side-menu-links" aria-label="Pages">
+            <a href="/games" id="games-link">Games <span>→</span></a>
+            <a href="/dashboard" id="dashboard-link" hidden>Dashboard <span>→</span></a>
+            <a href="/history" id="history-link" hidden>Game history <span>→</span></a>
+            <a href="/deposit" id="deposit-link" hidden>Redeem credits <span>→</span></a>
+            <a href="/login" id="login-link">Login / Register <span>→</span></a>
+        </nav>
+        <div class="side-menu-bottom">
+            <button id="theme-toggle" type="button">Switch to light mode</button>
+            <button id="logout-button" class="logout-button" type="button" hidden>Log out</button>
+        </div>
+    </aside>
+</div>

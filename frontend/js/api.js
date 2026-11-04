@@ -15,6 +15,7 @@ if (["live", "mock"].includes(apiModeOverride)) {
 const API_MODE = localStorage.getItem(API_MODE_KEY) || "live";
 const STATIC_ROUTES = {
     "/": "/index.html",
+    "/games": "/games.html",
     "/login": "/login.html",
     "/dashboard": "/dashboard.html",
     "/blackjack": "/blackjack.html",

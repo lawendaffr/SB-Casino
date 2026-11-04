@@ -11,6 +11,11 @@ public class PageController {
         return "forward:/index.html";
     }
 
+    @GetMapping("/games")
+    public String games() {
+        return "forward:/games.html";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "forward:/login.html";

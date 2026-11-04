@@ -7,6 +7,8 @@
 .history-panel th, .history-panel td { white-space: nowrap; }
 .history-panel td:nth-child(1), .history-panel td:nth-child(4), .history-panel td:nth-child(5), .history-panel td:nth-child(6) { font-variant-numeric: tabular-nums; }
 .history-panel td:nth-child(2), .history-panel td:nth-child(3), .history-panel td:nth-child(7) { color: var(--text-primary); font-weight: 600; }
+.history-panel td.status-completed { color: var(--success); }
+.history-panel td.status-active { color: var(--accent); }
 .history-pagination { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem 1rem; }
 .history-pagination p { margin: 0; font-size: .72rem; }
 .history-pagination > div { display: flex; gap: .45rem; }

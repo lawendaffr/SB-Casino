@@ -171,6 +171,19 @@ export async function apiRequest(path, options = {}) {
         result = { balance: demoState.user.balance };
     } else if (path === "/api/users/me/transactions") {
         result = demoState.transactions.map(transaction => ({ ...transaction }));
+    } else if (path === "/api/users/me/stats") {
+        const completed = demoState.games.filter(game => game.status === "COMPLETED");
+        const wins = completed.filter(game => game.result === "PLAYER_WIN").length;
+        const pushes = completed.filter(game => game.result === "PUSH").length;
+        result = {
+            gamesPlayed: completed.length,
+            wins,
+            losses: completed.length - wins - pushes,
+            pushes,
+            totalBet: completed.reduce((sum, game) => sum + Number(game.bet || 0), 0),
+            totalPayout: completed.reduce((sum, game) => sum + Number(game.payout || 0), 0),
+            netResult: completed.reduce((sum, game) => sum + Number(game.netResult || 0), 0)
+        };
     } else if (path === "/api/games/blackjack/active") {
         if (!demoState.activeGame) throw mockError(404, "No active Blackjack game");
         result = blackjackResponse(demoState.activeGame);

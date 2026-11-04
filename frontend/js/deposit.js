@@ -10,6 +10,7 @@ async function loadBalance() {
     try {
         const data = await apiRequest("/api/users/me/balance");
         balanceElement.textContent = data.balance;
+        window.updatePlayerBalance?.(data.balance);
     } catch (error) {
         balanceElement.textContent = "Unavailable";
     }
@@ -55,6 +56,7 @@ async function redeemCode(event) {
         });
 
         balanceElement.textContent = result.balance;
+        window.updatePlayerBalance?.(result.balance);
 
         redeemMessage.textContent =
             `Success! ${result.amount} credits added. ` +

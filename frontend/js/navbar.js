@@ -2,36 +2,24 @@ const THEME_STORAGE_KEY = "sbCasinoTheme";
 
 function getPreferredTheme() {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-    if (savedTheme === "dark" || savedTheme === "light") {
-        return savedTheme;
-    }
-    return "dark";
+    return savedTheme === "light" ? "light" : "dark";
 }
 
 function applyTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(THEME_STORAGE_KEY, theme);
 
-    const toggleButtons = document.querySelectorAll("#theme-toggle");
-    toggleButtons.forEach((toggleButton) => {
-        const isDark = theme === "dark";
-        toggleButton.setAttribute(
-            "aria-label",
-            isDark ? "Switch to light mode" : "Switch to dark mode"
-        );
-        toggleButton.setAttribute("aria-pressed", String(isDark));
-        toggleButton.textContent = isDark ? "Theme: Onyx" : "Theme: Light";
-    });
+    const toggle = document.getElementById("theme-toggle");
+    if (toggle) {
+        toggle.textContent = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+        toggle.setAttribute("aria-pressed", String(theme === "dark"));
+    }
 }
 
 function toggleTheme() {
-    const currentTheme =
-        document.documentElement.getAttribute("data-theme") || getPreferredTheme();
-    const nextTheme = currentTheme === "dark" ? "light" : "dark";
-    applyTheme(nextTheme);
+    applyTheme(getPreferredTheme() === "dark" ? "light" : "dark");
 }
 
-// Apply saved/default theme immediately to avoid flash of unstyled theme
 applyTheme(getPreferredTheme());
 
 function updatePageLinks(root = document) {
@@ -40,90 +28,124 @@ function updatePageLinks(root = document) {
     });
 }
 
-async function loadNavbar() {
-    await window.apiReady;
-    updatePageLinks();
-    applyTheme(getPreferredTheme());
+window.updatePlayerBalance = balanceValue => {
+    const balance = document.getElementById("player-balance");
+    if (!balance || balance.hidden) return;
+    balance.textContent = `${Number(balanceValue).toLocaleString()} credits`;
+};
 
-    const navbarContainer = document.getElementById("navbar");
-    if (navbarContainer) {
-        try {
-            const response = await fetch("components/navbar.html");
-            if (!response.ok) {
-                throw new Error("Failed to load navbar");
-            }
-            navbarContainer.innerHTML = await response.text();
-            updatePageLinks(navbarContainer);
-        } catch (error) {
-            console.warn("Falling back to inline navbar:", error);
-            navbarContainer.innerHTML = `
-                <nav id="main-navbar">
-                    <a href="/">SB-Casino</a>
-                    <a href="/">Home</a>
+function setMenuOpen(open) {
+    const menu = document.getElementById("side-menu");
+    const backdrop = document.getElementById("menu-backdrop");
+    const toggle = document.getElementById("menu-toggle");
+    if (!menu || !backdrop || !toggle) return;
 
-                    <a href="/dashboard" id="dashboard-link" hidden>Dashboard</a>
-                    <a href="/blackjack" id="blackjack-link" hidden>Blackjack</a>
-                    <a href="/history" id="history-link" hidden>Game History</a>
-                    <a href="/deposit" id="deposit-link" hidden>Redeem Code</a>
+    menu.hidden = !open;
+    menu.setAttribute("aria-hidden", String(!open));
+    backdrop.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.classList.toggle("menu-open", open);
 
-                    <button type="button" id="theme-toggle">Theme: Onyx</button>
-                    <a href="/login" id="login-link">Login / Register</a>
-                    <button type="button" id="logout-button" hidden>Logout</button>
-                </nav>
-                <hr>
-            `;
-            updatePageLinks(navbarContainer);
-        }
+    if (open) document.getElementById("menu-close")?.focus();
+    else toggle.focus();
+}
 
-        const loggedIn = Boolean(localStorage.getItem("accessToken"));
+async function loadPlayerSummary(loggedIn) {
+    const name = document.getElementById("player-name");
+    const avatar = document.getElementById("player-avatar");
+    const balance = document.getElementById("player-balance");
+    const profileLink = document.getElementById("player-profile-link");
+    if (!name || !avatar || !balance) return;
+    if (profileLink) {
+        profileLink.href = window.appRoute(loggedIn ? "/dashboard" : "/login");
+        profileLink.setAttribute("aria-label", loggedIn ? "Open player dashboard" : "Log in to your account");
+    }
 
-        const loginLink = document.getElementById("login-link");
-        const logoutButton = document.getElementById("logout-button");
-        const dashboardLink = document.getElementById("dashboard-link");
-        const blackjackLink = document.getElementById("blackjack-link");
-        const historyLink = document.getElementById("history-link");
-        const depositLink = document.getElementById("deposit-link");
-        const themeToggle = document.getElementById("theme-toggle");
-
-        if (loginLink) loginLink.hidden = loggedIn;
-        if (logoutButton) {
-            logoutButton.hidden = !loggedIn;
-            logoutButton.addEventListener("click", logout);
-        }
-
-        if (dashboardLink) dashboardLink.hidden = !loggedIn;
-        if (blackjackLink) blackjackLink.hidden = !loggedIn;
-        if (historyLink) historyLink.hidden = !loggedIn;
-        if (depositLink) depositLink.hidden = !loggedIn;
-
-        if (themeToggle) {
-            themeToggle.addEventListener("click", toggleTheme);
-        }
-
-        applyTheme(getPreferredTheme());
+    if (!loggedIn) {
+        name.textContent = "Guest";
+        avatar.textContent = "G";
+        balance.hidden = true;
         return;
     }
 
-    const homeContainer = document.getElementById("navbar-container");
-    if (homeContainer) {
-        homeContainer.innerHTML = `
-            <div id="home-toolbar">
-                <button type="button" id="theme-toggle"></button>
-            </div>
-        `;
-        const themeToggle = document.getElementById("theme-toggle");
-        if (themeToggle) {
-            themeToggle.addEventListener("click", toggleTheme);
-        }
-        applyTheme(getPreferredTheme());
+    name.textContent = "Player";
+    try {
+        const user = await apiRequest("/api/users/me");
+        name.textContent = user.username;
+        avatar.textContent = (user.username || "P").slice(0, 1).toUpperCase();
+        balance.hidden = false;
+        window.updatePlayerBalance(user.balance);
+    } catch (error) {
+        console.warn("Could not load player summary:", error);
+        balance.hidden = true;
     }
+}
+
+function bindMenu() {
+    const toggle = document.getElementById("menu-toggle");
+    const close = document.getElementById("menu-close");
+    const backdrop = document.getElementById("menu-backdrop");
+    const themeToggle = document.getElementById("theme-toggle");
+    const logoutButton = document.getElementById("logout-button");
+
+    toggle?.addEventListener("click", () => setMenuOpen(true));
+    close?.addEventListener("click", () => setMenuOpen(false));
+    backdrop?.addEventListener("click", () => setMenuOpen(false));
+    themeToggle?.addEventListener("click", toggleTheme);
+    logoutButton?.addEventListener("click", logout);
+
+    document.querySelectorAll(".side-menu-links a").forEach(link => {
+        link.addEventListener("click", () => setMenuOpen(false));
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !document.getElementById("side-menu")?.hidden) {
+            setMenuOpen(false);
+        }
+    });
+}
+
+async function loadNavbar() {
+    await window.apiReady;
+    const navbarContainer = document.getElementById("navbar");
+    if (!navbarContainer) return;
+
+    try {
+        const response = await fetch("components/navbar.html");
+        if (!response.ok) throw new Error("Failed to load navbar");
+        navbarContainer.innerHTML = await response.text();
+    } catch (error) {
+        console.warn("Could not load navbar component:", error);
+        navbarContainer.innerHTML = `
+            <div class="nav-shell"><nav id="main-navbar" aria-label="Main navigation">
+                <a class="nav-home" href="/">SB-Casino</a>
+                <div class="player-summary" id="player-summary"><a class="player-profile-link" id="player-profile-link" href="/dashboard" aria-label="Open player dashboard"><span class="player-avatar" id="player-avatar">G</span><span class="player-name" id="player-name">Guest</span></a><span class="player-balance" id="player-balance" hidden></span></div>
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-controls="side-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </nav><button id="menu-backdrop" class="menu-backdrop" type="button" aria-label="Close menu" hidden></button>
+            <aside id="side-menu" class="side-menu" aria-label="Site menu" aria-hidden="true" hidden>
+                <div class="side-menu-heading"><div><p class="menu-eyebrow">SB-CASINO</p><h2>Menu</h2></div><button id="menu-close" class="menu-close" type="button" aria-label="Close menu">×</button></div>
+                <nav class="side-menu-links"><a href="/games" id="games-link">Games <span>→</span></a><a href="/dashboard" id="dashboard-link">Dashboard <span>→</span></a><a href="/history" id="history-link">Game history <span>→</span></a><a href="/deposit" id="deposit-link">Redeem credits <span>→</span></a><a href="/login" id="login-link">Login / Register <span>→</span></a></nav>
+                <div class="side-menu-bottom"><button id="theme-toggle" type="button">Switch to light mode</button><button id="logout-button" class="logout-button" type="button" hidden>Log out</button></div>
+            </aside></div>`;
+    }
+
+    updatePageLinks(navbarContainer);
+    const loggedIn = Boolean(localStorage.getItem("accessToken"));
+    document.getElementById("dashboard-link").hidden = !loggedIn;
+    document.getElementById("history-link").hidden = !loggedIn;
+    document.getElementById("deposit-link").hidden = !loggedIn;
+    document.getElementById("login-link").hidden = loggedIn;
+    document.getElementById("logout-button").hidden = !loggedIn;
+
+    bindMenu();
+    await loadPlayerSummary(loggedIn);
+    applyTheme(getPreferredTheme());
 }
 
 async function logout() {
     const refreshToken = localStorage.getItem("refreshToken");
-
     try {
-        if (refreshToken && typeof apiRequest === "function") {
+        if (refreshToken) {
             await apiRequest("/api/auth/logout", {
                 method: "POST",
                 body: JSON.stringify({ refreshToken })
@@ -134,7 +156,6 @@ async function logout() {
     } finally {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-
         window.location.href = window.appRoute("/");
     }
 }

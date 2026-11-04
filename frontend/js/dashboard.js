@@ -1,4 +1,3 @@
-const userIdElement = document.getElementById("user-id");
 const usernameElement = document.getElementById("username");
 const balanceElement = document.getElementById("balance");
 const messageElement = document.getElementById("dashboard-message");
@@ -9,6 +8,9 @@ const refreshTransactionsButton =
 
 const transactionsMessage = document.getElementById("transactions-message");
 const transactionsList = document.getElementById("transactions-list");
+const gamesPlayedElement = document.getElementById("games-played");
+const gamesWonElement = document.getElementById("games-won");
+const netResultElement = document.getElementById("net-result");
 
 async function loadProfile() {
     try {
@@ -16,9 +18,9 @@ async function loadProfile() {
 
         const user = await apiRequest("/api/users/me");
 
-        userIdElement.textContent = user.id;
         usernameElement.textContent = user.username;
         balanceElement.textContent = user.balance;
+        window.updatePlayerBalance?.(user.balance);
 
         messageElement.textContent = "";
     } catch (error) {
@@ -32,6 +34,7 @@ async function loadBalance() {
         const result = await apiRequest("/api/users/me/balance");
 
         balanceElement.textContent = result.balance;
+        window.updatePlayerBalance?.(result.balance);
         messageElement.textContent = "";
     } catch (error) {
         messageElement.textContent =
@@ -88,6 +91,7 @@ async function loadTransactions() {
 
             const sign = difference > 0 ? "+" : difference < 0 ? "-" : "";
             amountCell.textContent = `${sign}${transaction.amount} credits`;
+            amountCell.classList.add(difference > 0 ? "amount-positive" : difference < 0 ? "amount-negative" : "amount-neutral");
 
             row.appendChild(typeCell);
             row.appendChild(descriptionCell);
@@ -102,8 +106,26 @@ async function loadTransactions() {
     }
 }
 
+async function loadStatistics() {
+    try {
+        const stats = await apiRequest("/api/users/me/stats");
+        gamesPlayedElement.textContent = Number(stats.gamesPlayed).toLocaleString();
+        gamesWonElement.textContent = Number(stats.wins).toLocaleString();
+        const net = Number(stats.netResult);
+        netResultElement.textContent = `${net > 0 ? "+" : ""}${net.toLocaleString()} credits`;
+        netResultElement.classList.toggle("amount-positive", net > 0);
+        netResultElement.classList.toggle("amount-negative", net < 0);
+        netResultElement.classList.toggle("amount-neutral", net === 0);
+    } catch (error) {
+        gamesPlayedElement.textContent = "—";
+        gamesWonElement.textContent = "—";
+        netResultElement.textContent = "Unavailable";
+    }
+}
+
 refreshBalanceButton.addEventListener("click", loadBalance);
 refreshTransactionsButton.addEventListener("click", loadTransactions);
 
 loadProfile();
 loadTransactions();
+loadStatistics();

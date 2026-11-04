@@ -1,4 +1,4 @@
-/* Home page game catalog */
+/* Homepage welcome area */
 .home-page {
     --bg-canvas: #111217;
     --bg-surface: #191a21;
@@ -35,18 +35,11 @@
     --accent: #465fc5;
     --accent-hover: #354cae;
     --accent-contrast: #ffffff;
-    background:
-        radial-gradient(ellipse at 4% 42%, rgba(104, 139, 247, .12), transparent 29rem),
-        radial-gradient(ellipse at 96% 60%, rgba(239, 130, 180, .11), transparent 26rem),
-        linear-gradient(180deg, #ffffff 0%, #ffffff 70%, #fcfbff 100%);
+    background: linear-gradient(180deg, #fff 0%, #fff 70%, #fcfbff 100%);
 }
-.home-page #navbar-container { background: transparent; border: 0; }
-.home-page #home-toolbar { max-width: 1120px; padding: 1rem 2rem; }
-.home-page #theme-toggle { background: var(--bg-surface); border-color: var(--border-strong); }
 .home-page .home-shell { width: min(1120px, 100%); max-width: 1120px; flex: 1; margin: 0 auto; padding: 3rem 2rem 4rem; }
-:root[data-theme="light"] .section-eyebrow { color: #5969a3; }
 .home-welcome { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin: 0 0 3rem; padding: clamp(1.7rem, 4vw, 3rem); border: 1px solid var(--border-subtle); border-radius: 14px; background: radial-gradient(ellipse at 90% 0, rgba(94, 111, 177, .17), transparent 45%), var(--bg-surface); }
-:root[data-theme="light"] .home-welcome { border-color: #e5e9f8; background: linear-gradient(112deg, #ffffff 0%, #f4f7ff 64%, #fff7fb 100%); box-shadow: 0 18px 55px rgba(54, 72, 137, .08); }
+:root[data-theme="light"] .home-welcome { border-color: #e5e9f8; background: linear-gradient(112deg, #fff 0%, #f4f7ff 64%, #fff7fb 100%); box-shadow: 0 18px 55px rgba(54, 72, 137, .08); }
 .home-welcome h1 { margin: 0; color: var(--text-primary); font: 600 clamp(2rem, 4.5vw, 3.25rem)/1.08 "Urbanist", "Trebuchet MS", sans-serif; letter-spacing: -.045em; }
 .welcome-description { margin: .65rem 0 0; color: var(--text-secondary); font-size: .88rem; }
 .welcome-actions { display: flex; align-items: center; flex-shrink: 0; gap: 1.2rem; }
@@ -58,65 +51,13 @@
 .welcome-mark::before { position: absolute; inset: 8px; border: 1px solid rgba(165, 186, 255, .2); border-radius: 50%; content: ""; }
 :root[data-theme="light"] .welcome-mark { border-color: #d8def2; color: #697dc9; }
 :root[data-theme="light"] .welcome-mark::before { border-color: #e6e9f5; }
-.games-section { margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
-.games-section { scroll-margin-top: 1.25rem; }
-.games-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; animation: catalog-enter 450ms both; }
-.section-eyebrow { margin: 0 0 .35rem; color: #9da9d9; font-size: .68rem; font-weight: 700; letter-spacing: .18em; }
-.games-heading h2 { margin: 0; color: var(--text-primary); font: 600 1.8rem/1.1 "Urbanist", "Trebuchet MS", sans-serif; letter-spacing: -.035em; }
-.games-count { display: flex; align-items: center; gap: .5rem; margin: 0 .1rem .35rem 0; color: var(--text-secondary); font-size: .74rem; }
-.games-count span { width: 7px; height: 7px; border-radius: 50%; background: #83a9ff; box-shadow: 0 0 12px rgba(131, 169, 255, .45); }
-.games-count b { color: var(--text-muted); font-weight: 400; }
-.game-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
-.game-tile { display: block; overflow: hidden; margin: 0; padding: 0; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--bg-surface); box-shadow: 0 8px 24px rgba(0, 0, 0, .16); animation: catalog-enter 500ms both; }
-.game-tile-playable { color: inherit; text-decoration: none; transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease; }
-.game-tile-playable:hover { transform: translateY(-4px); border-color: #737fa9; box-shadow: 0 16px 34px rgba(0, 0, 0, .28); }
-.game-tile-playable:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.game-tile:nth-child(2) { animation-delay: 50ms; }
-.game-tile:nth-child(3) { animation-delay: 100ms; }
-.game-tile:nth-child(4) { animation-delay: 150ms; }
-.game-tile:nth-child(5) { animation-delay: 200ms; }
-.game-art { position: relative; display: grid; min-height: 205px; aspect-ratio: 1.58; place-items: center; overflow: hidden; }
-.art-blackjack { background: radial-gradient(ellipse at 50% 105%, rgba(109, 154, 255, .58), transparent 58%), linear-gradient(135deg, #283564, #25294b 52%, #241f37); }
-.art-blackjack::before, .art-blackjack::after { position: absolute; width: 150px; height: 205px; border: 1px solid rgba(255, 255, 255, .15); border-radius: 12px; background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.015)); content: ""; transform: rotate(-18deg) translate(-30px, 9px); }
-.art-blackjack::after { transform: rotate(15deg) translate(36px, 4px); }
-.art-glow { position: absolute; width: 150px; height: 150px; border-radius: 50%; background: rgba(107, 166, 255, .32); filter: blur(45px); }
-.art-symbol { z-index: 1; color: #f7f7ff; font: 700 clamp(4.5rem, 8vw, 6rem)/1 "Urbanist", sans-serif; letter-spacing: -.08em; text-shadow: 0 8px 28px rgba(0, 0, 0, .28); }
-.art-suit { position: absolute; z-index: 1; right: 28%; bottom: 23%; color: #ff8294; font-size: 2rem; transform: rotate(12deg); }
-.art-label { position: absolute; right: 1rem; bottom: .85rem; color: rgba(255,255,255,.64); font-size: .57rem; font-weight: 700; letter-spacing: .18em; }
-.art-violet { background: radial-gradient(circle at 50% 42%, #c3a2ff, transparent 34%), linear-gradient(135deg, #6740a8, #332753); }
-.art-coral { background: radial-gradient(circle at 50% 42%, #ffaf91, transparent 34%), linear-gradient(135deg, #9d4c63, #482b43); }
-.art-cyan { background: radial-gradient(circle at 50% 42%, #79dcdd, transparent 31%), linear-gradient(135deg, #285965, #202d42); }
-.art-blue { background: radial-gradient(circle at 50% 42%, #b3c4ff, transparent 34%), linear-gradient(135deg, #4d62b6, #2e3157); }
-.placeholder-number { color: rgba(255, 255, 255, .92); font: 600 clamp(3.8rem, 7vw, 5.5rem)/1 "Urbanist", sans-serif; letter-spacing: -.07em; text-shadow: 0 8px 30px rgba(0, 0, 0, .22); }
-.placeholder-status { position: absolute; right: 1rem; bottom: .85rem; color: rgba(255, 255, 255, .62); font-size: .56rem; font-weight: 700; letter-spacing: .16em; }
-.game-tile-meta { display: flex; align-items: center; justify-content: space-between; min-height: 78px; padding: .9rem 1.1rem; }
-.game-tile-meta h2 { margin: 0; color: var(--text-primary); font-size: .9rem; font-weight: 700; letter-spacing: -.01em; }
-.game-tile-meta p { margin: .18rem 0 0; color: var(--text-muted); font-size: .68rem; }
-.game-launch { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--border-strong); border-radius: 50%; color: var(--accent); font-size: .9rem; transition: background-color 170ms ease, color 170ms ease; }
-.game-tile-playable:hover .game-launch { color: #171a27; background: var(--accent); }
-.soon-dot { width: 7px; height: 7px; margin-right: .35rem; border-radius: 50%; background: #565966; }
-.site-footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 1120px; width: 100%; margin: auto auto 0; padding: 1.2rem 2rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: .62rem; letter-spacing: .04em; }
-.site-footer span:first-child { color: var(--text-secondary); font-weight: 700; letter-spacing: .14em; }
-@keyframes catalog-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 760px) {
     .home-page .home-shell { padding: 2.25rem 1.25rem; }
     .home-welcome { align-items: flex-start; flex-direction: column; gap: 1.4rem; margin-bottom: 2.5rem; }
     .welcome-mark { display: none; }
-    .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
-    .game-art { min-height: 170px; }
 }
 @media (max-width: 480px) {
-    .home-page #home-toolbar { padding: .8rem 1.25rem; }
     .home-page .home-shell { padding-top: 1.5rem; }
-    .site-footer { padding-inline: 1.25rem; font-size: .56rem; }
     .home-welcome { margin-bottom: 2rem; }
     .welcome-actions { flex-wrap: wrap; gap: .9rem; }
-    .games-heading { align-items: start; flex-direction: column; }
-    .games-count { margin: 0; }
-    .game-grid { grid-template-columns: 1fr; }
-    .game-art { min-height: 190px; }
-}
-@media (prefers-reduced-motion: reduce) {
-    .games-heading, .game-tile { animation: none; }
-    .game-tile-playable, .game-launch { transition: none; }
 }

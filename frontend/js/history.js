@@ -46,15 +46,26 @@ async function loadGames() {
                     game.status,
                     game.bet,
                     game.payout ?? "-",
-                    game.netResult ?? "-",
+                    game.netResult === null || game.netResult === undefined
+                        ? "-"
+                        : `${game.netResult > 0 ? "+" : ""}${game.netResult}`,
                     game.result ?? "-",
                     formatDate(game.createdAt),
                     formatDate(game.finishedAt)
                 ];
 
-                for (const value of values) {
+                for (const [index, value] of values.entries()) {
                     const cell = document.createElement("td");
                     cell.textContent = value;
+                    if (index === 2) cell.classList.add(`status-${String(game.status).toLowerCase()}`);
+                    if (index === 5 && typeof game.netResult === "number") {
+                        cell.classList.add(game.netResult > 0 ? "amount-positive" : game.netResult < 0 ? "amount-negative" : "amount-neutral");
+                    }
+                    if (index === 6 && game.result) {
+                        const result = game.result.toLowerCase();
+                        const isWin = result.includes("win") || result.includes("blackjack");
+                        cell.classList.add(isWin ? "amount-positive" : result === "push" ? "amount-neutral" : "amount-negative");
+                    }
                     row.appendChild(cell);
                 }
 

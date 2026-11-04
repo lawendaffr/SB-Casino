@@ -20,14 +20,24 @@
         </header>
 
         <div class="dashboard-grid">
-            <section class="panel dashboard-profile">
-                <header class="panel-heading"><h2>Your Profile</h2><button id="refresh-balance">Refresh</button></header>
-                <dl class="profile-details">
-                    <div><dt>User ID</dt><dd id="user-id">Loading...</dd></div>
-                    <div><dt>Username</dt><dd id="username">Loading...</dd></div>
-                    <div class="profile-balance"><dt>Balance</dt><dd><span id="balance">Loading...</span> <small>credits</small></dd></div>
-                </dl>
-            </section>
+            <div class="dashboard-side-column">
+                <section class="panel dashboard-profile">
+                    <header class="panel-heading"><h2>Your Profile</h2><button id="refresh-balance">Refresh</button></header>
+                    <dl class="profile-details">
+                        <div><dt>Username</dt><dd id="username">Loading...</dd></div>
+                        <div class="profile-balance"><dt>Balance</dt><dd><span id="balance">Loading...</span> <small>credits</small></dd></div>
+                    </dl>
+                </section>
+
+                <section class="panel dashboard-stats" aria-labelledby="stats-heading">
+                    <header class="panel-heading"><h2 id="stats-heading">Your play</h2><a class="dashboard-games-link" href="/games">Browse games <span aria-hidden="true">↗</span></a></header>
+                    <div class="stat-grid">
+                        <div><span>Games played</span><strong id="games-played">—</strong></div>
+                        <div><span>Wins</span><strong id="games-won">—</strong></div>
+                        <div><span>Net result</span><strong id="net-result">—</strong></div>
+                    </div>
+                </section>
+            </div>
 
             <section class="panel dashboard-activity">
                 <header class="panel-heading"><h2>Recent Activity</h2><button id="refresh-transactions">Refresh</button></header>
