@@ -25,3 +25,9 @@ docker compose up --build -d
 localhost:8080  
 
 happi
+
+## Frontend files
+
+The editable frontend is in the repository-root `frontend/` directory. Docker Compose mounts it into the backend container, and Spring serves it at `http://localhost:8080`. Frontend file edits are picked up without rebuilding the image; rebuild after backend changes with `docker compose up --build -d`.
+
+When running Spring Boot from IntelliJ, set the working directory to `kasynobackend`; Spring will resolve the default `../frontend/` location from there.

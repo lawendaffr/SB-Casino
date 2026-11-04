@@ -38,7 +38,7 @@ public class SecurityConfig {
                                 "/", "/login", "/dashboard", "/blackjack", "/history", "/deposit",
                                 "/index.html", "/login.html", "/dashboard.html",
                                 "/blackjack.html", "/history.html", "/deposit.html",
-                                "/css/**", "/js/**", "/components/**", "/images/**",
+                                "/css/**", "/js/**", "/components/**", "/images/**", "/assets/**",
                                 "/favicon.ico"
                         ).permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
