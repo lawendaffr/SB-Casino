@@ -5,53 +5,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SB-Casino - Login</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Urbanist:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/auth.css">
 </head>
-<body>
+<body class="page-auth">
 
     <div id="navbar"></div>
 
-    <main>
-        <h1>Account</h1>
+    <main class="page-main auth-page">
+        <header class="page-heading">
+            <p class="page-eyebrow">ACCOUNT</p>
+            <h1>Account</h1>
+        </header>
 
-        <button id="show-login" type="button">Login</button>
-        <button id="show-register" type="button">Register</button>
+        <section class="panel auth-card">
+            <div class="auth-tabs">
+                <button id="show-login" type="button">Login</button>
+                <button id="show-register" type="button">Register</button>
+            </div>
 
-        <form id="login-form">
-            <h2>Login</h2>
+            <form id="login-form">
+                <h2>Login</h2>
 
-            <label for="login-username">Username</label>
-            <input id="login-username" name="username"
-                   autocomplete="username" required>
+                <label for="login-username">Username</label>
+                <input id="login-username" name="username"
+                       autocomplete="username" required>
 
-            <label for="login-password">Password</label>
-            <input id="login-password" name="password"
-                   type="password" autocomplete="current-password"
-                   required>
+                <label for="login-password">Password</label>
+                <input id="login-password" name="password"
+                       type="password" autocomplete="current-password"
+                       required>
 
-            <button type="submit">Login</button>
-        </form>
+                <button type="submit">Login</button>
+            </form>
 
-        <form id="register-form" hidden>
-            <h2>Register</h2>
+            <form id="register-form" hidden>
+                <h2>Register</h2>
 
-            <label for="register-username">Username</label>
-            <input id="register-username" name="username"
-                   autocomplete="username" required>
+                <label for="register-username">Username</label>
+                <input id="register-username" name="username"
+                       autocomplete="username" required>
 
-            <label for="register-email">Email</label>
-            <input id="register-email" name="email"
-                   type="email" autocomplete="email" required>
+                <label for="register-email">Email</label>
+                <input id="register-email" name="email"
+                       type="email" autocomplete="email" required>
 
-            <label for="register-password">Password</label>
-            <input id="register-password" name="password"
-                   type="password" autocomplete="new-password"
-                   required>
+                <label for="register-password">Password</label>
+                <input id="register-password" name="password"
+                       type="password" autocomplete="new-password"
+                       required>
 
-            <button type="submit">Create Account</button>
-        </form>
+                <button type="submit">Create Account</button>
+            </form>
 
-        <p id="auth-message" role="status"></p>
+            <p id="auth-message" role="status"></p>
+        </section>
     </main>
 
     <script src="js/navbar.js"></script>

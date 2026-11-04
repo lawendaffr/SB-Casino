@@ -1,0 +1,16 @@
+.auth-page { max-width: 540px !important; padding-top: 3.5rem !important; }
+.auth-page .page-heading { margin-bottom: 1.25rem; }
+.auth-card { padding: 1.25rem !important; }
+.auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; margin-bottom: 1.25rem; padding: .3rem; border-radius: 9px; background: var(--bg-subtle); }
+.auth-tabs button { border-color: transparent; background: transparent; color: var(--text-secondary); }
+.auth-tabs button:hover { background: var(--bg-muted); }
+.auth-page:has(#login-form:not([hidden])) #show-login,
+.auth-page:has(#register-form:not([hidden])) #show-register { border-color: var(--border-strong); background: var(--bg-surface); color: var(--text-primary); box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
+.auth-card form { gap: .6rem; }
+.auth-card form h2 { margin: .15rem 0 .35rem; }
+.auth-card form button { margin-top: .55rem; }
+.auth-card #auth-message { margin: 1rem 0 0; }
+.auth-card #auth-message:not(:empty) { padding: .8rem .9rem; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--bg-subtle); }
+@media (max-width: 640px) {
+    .auth-page { padding-top: 2rem !important; }
+}

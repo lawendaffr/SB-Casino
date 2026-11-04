@@ -4,44 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - SB-Casino</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Urbanist:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
-<body>
+<body class="page-dashboard">
     <div id="navbar"></div>
 
-    <main>
-        <h1>Dashboard</h1>
+    <main class="page-main dashboard-page">
+        <header class="page-heading">
+            <p class="page-eyebrow">PLAYER AREA</p>
+            <h1>Dashboard</h1>
+        </header>
 
-        <section>
-            <h2>Your Profile</h2>
-            <button id="refresh-balance">Refresh Balance</button>
-            <p>User ID: <span id="user-id">Loading...</span></p>
-            <p>Username: <span id="username">Loading...</span></p>
-            <p>Balance: <span class="balance-value"><span id="balance">Loading...</span> credits</span></p>
-        </section>
+        <div class="dashboard-grid">
+            <section class="panel dashboard-profile">
+                <header class="panel-heading"><h2>Your Profile</h2><button id="refresh-balance">Refresh</button></header>
+                <dl class="profile-details">
+                    <div><dt>User ID</dt><dd id="user-id">Loading...</dd></div>
+                    <div><dt>Username</dt><dd id="username">Loading...</dd></div>
+                    <div class="profile-balance"><dt>Balance</dt><dd><span id="balance">Loading...</span> <small>credits</small></dd></div>
+                </dl>
+            </section>
 
+            <section class="panel dashboard-activity">
+                <header class="panel-heading"><h2>Recent Activity</h2><button id="refresh-transactions">Refresh</button></header>
+                <p id="transactions-message"></p>
 
-        <section>
-            <h2>Recent Activity</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-list"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
 
-            <button id="refresh-transactions">Refresh</button>
-            <p id="transactions-message"></p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody id="transactions-list"></tbody>
-            </table>
-        </section>
-
-
-        <p id="dashboard-message"></p>
+        <p id="dashboard-message" class="page-message" role="status"></p>
     </main>
 
     <script src="js/api.js"></script>

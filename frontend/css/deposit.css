@@ -1,0 +1,20 @@
+.deposit-page { max-width: 940px !important; }
+.deposit-layout { display: grid; grid-template-columns: .85fr 1.35fr; align-items: start; gap: 1rem; }
+.balance-panel { min-height: 180px; background: radial-gradient(ellipse at 90% 5%, rgba(101, 125, 222, .16), transparent 60%), var(--bg-surface) !important; }
+.balance-panel .page-eyebrow { margin: 0; }
+.balance-panel h2 { margin: .6rem 0 1.1rem; color: var(--accent); font: 700 clamp(1.8rem, 4vw, 2.4rem) var(--font-display); letter-spacing: -.04em; }
+.balance-panel h2 small { color: var(--text-muted); font: 500 .72rem var(--font-sans); letter-spacing: 0; }
+.balance-panel button { font-size: .72rem; }
+.redeem-panel > p { margin: -.35rem 0 1.1rem; font-size: .78rem; }
+#redeem-form { grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .65rem; }
+#redeem-form label { grid-column: 1 / -1; margin-bottom: -.25rem; }
+#redeem-form #code { min-width: 0; letter-spacing: .08em; text-transform: uppercase; }
+#redeem-form #redeem-button { min-width: 100px; }
+#redeem-message { margin: .8rem 0 0; }
+@media (max-width: 700px) {
+    .deposit-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+    #redeem-form { grid-template-columns: 1fr; }
+    #redeem-form label { grid-column: auto; }
+}

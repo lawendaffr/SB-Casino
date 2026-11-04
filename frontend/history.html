@@ -5,39 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game History - SB-Casino</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Urbanist:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/history.css">
 </head>
-<body>
+<body class="page-history">
     <div id="navbar"></div>
 
-    <main>
-        <h1>Game History</h1>
+    <main class="page-main history-page">
+        <header class="page-heading history-heading">
+            <div><p class="page-eyebrow">PLAYER AREA</p><h1>Game History</h1></div>
+            <button id="refresh-games">Refresh</button>
+        </header>
 
-        <button id="refresh-games">Refresh</button>
+        <section class="panel history-panel">
+            <p id="games-message" role="status">Loading games...</p>
 
-        <p id="games-message">Loading games...</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Game</th>
+                            <th>Status</th>
+                            <th>Bet</th>
+                            <th>Payout</th>
+                            <th>Net Result</th>
+                            <th>Result</th>
+                            <th>Started</th>
+                            <th>Finished</th>
+                        </tr>
+                    </thead>
+                    <tbody id="games-list"></tbody>
+                </table>
+            </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Game</th>
-                    <th>Status</th>
-                    <th>Bet</th>
-                    <th>Payout</th>
-                    <th>Net Result</th>
-                    <th>Result</th>
-                    <th>Started</th>
-                    <th>Finished</th>
-                </tr>
-            </thead>
-            <tbody id="games-list"></tbody>
-        </table>
+            <div class="history-pagination">
+                <p id="page-info"></p>
 
-        <p id="page-info"></p>
-
-        <button id="previous-page" disabled>Previous</button>
-        <button id="next-page" disabled>Next</button>
+                <div>
+                    <button id="previous-page" disabled>Previous</button>
+                    <button id="next-page" disabled>Next</button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="js/api.js"></script>

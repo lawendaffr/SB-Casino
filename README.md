@@ -41,3 +41,7 @@ python -m http.server 5500
 Open `http://localhost:5500/?api=mock`. The choice is saved in this browser, and sample account, balance, game, and transaction data are stored in local storage. To switch back to the real backend, open `http://localhost:8080/?api=live` while Compose is running. These mode links also work when the frontend is served by Spring.
 
 When running Spring Boot from IntelliJ, set the working directory to `kasynobackend`; Spring will resolve the default `../frontend/` location from there.
+
+## Frontend stylesheets
+
+Shared theme tokens, navigation, controls, and tables live in `frontend/css/base.css`. Each page loads its own stylesheet alongside it: `home.css`, `auth.css`, `dashboard.css`, `blackjack.css`, `history.css`, or `deposit.css`. Put new page-only layout rules in that page's stylesheet so the shared base stays small.
