@@ -1,6 +1,4 @@
-// Browser-only replacement for the production API client.
-// The page scripts remain the same as ../frontend/js/*.js and call this
-// apiRequest function with the same endpoint paths and request bodies.
+// Mock API adapter used by the shared frontend when ?api=mock is selected.
 const DEMO_STORAGE_KEY = "sbCasinoMockBackend";
 const DEMO_CODES = { "WELCOME500": 500, "LUCKY250": 250 };
 
@@ -143,7 +141,7 @@ function blackjackAction(gameId, action) {
     return blackjackResponse(game);
 }
 
-async function apiRequest(path, options = {}) {
+export async function apiRequest(path, options = {}) {
     const method = (options.method || "GET").toUpperCase();
     const body = options.body ? JSON.parse(options.body) : {};
     let result;
@@ -209,10 +207,11 @@ async function apiRequest(path, options = {}) {
     return result;
 }
 
-// Start with the sample player signed in so the production navbar exposes
-// every player page immediately. Logout still works and stays logged out.
-if (!localStorage.getItem("accessToken") && !demoState.loggedOut) {
-    localStorage.setItem("accessToken", "demo-access-token");
-    localStorage.setItem("refreshToken", "demo-refresh-token");
+export function initialize() {
+    // Sign in the sample player so the main navbar exposes player pages.
+    if (!localStorage.getItem("accessToken") && !demoState.loggedOut) {
+        localStorage.setItem("accessToken", "demo-access-token");
+        localStorage.setItem("refreshToken", "demo-refresh-token");
+    }
+    saveDemoState();
 }
-saveDemoState();

@@ -35,6 +35,7 @@ function toggleTheme() {
 applyTheme(getPreferredTheme());
 
 async function loadNavbar() {
+    await window.apiReady;
     applyTheme(getPreferredTheme());
 
     const navbarContainer = document.getElementById("navbar");

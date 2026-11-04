@@ -1,5 +1,22 @@
 
 const API_BASE_URL = ""
+const API_MODE_KEY = "sbCasinoApiMode";
+const apiModeOverride = new URLSearchParams(window.location.search).get("api");
+const savedApiMode = localStorage.getItem(API_MODE_KEY);
+
+if (["live", "mock"].includes(apiModeOverride)) {
+    if (savedApiMode && savedApiMode !== apiModeOverride) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+    }
+    localStorage.setItem(API_MODE_KEY, apiModeOverride);
+}
+
+const API_MODE = localStorage.getItem(API_MODE_KEY) || "live";
+const mockAdapter = API_MODE === "mock" ? import("./api.mock.js") : null;
+window.apiReady = mockAdapter
+    ? mockAdapter.then(adapter => adapter.initialize())
+    : Promise.resolve();
 
 let refreshPromise = null;
 
@@ -41,6 +58,11 @@ async function refreshAccessToken() {
 }
 
 async function apiRequest(path, options = {}, retry = true) {
+    if (API_MODE === "mock") {
+        const adapter = await mockAdapter;
+        return adapter.apiRequest(path, options);
+    }
+
     const headers = {
         ...options.headers
     };
