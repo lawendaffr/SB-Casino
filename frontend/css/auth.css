@@ -4,6 +4,7 @@
 .auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; margin-bottom: 1.25rem; padding: .3rem; border-radius: 9px; background: var(--bg-subtle); }
 .auth-tabs button { border-color: transparent; background: transparent; color: var(--text-secondary); }
 .auth-tabs button:hover { background: var(--bg-muted); }
+.auth-tabs button[aria-pressed="true"] { border-color: var(--border-strong); background: var(--bg-surface); color: var(--text-primary); box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
 .auth-page:has(#login-form:not([hidden])) #show-login,
 .auth-page:has(#register-form:not([hidden])) #show-register { border-color: var(--border-strong); background: var(--bg-surface); color: var(--text-primary); box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
 .auth-card form { gap: .6rem; }

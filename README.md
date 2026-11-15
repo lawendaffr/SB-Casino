@@ -3,8 +3,8 @@
 ## Requirements
 
 - Git
-- Docker Desktop
-- Python (optional, for frontend-only work)
+- Docker Desktop for the full app
+- Node.js 20+ and npm for frontend-only development
 
 ## Setup
 
@@ -13,31 +13,33 @@
 git clone ...
 cd SB-Casino
 ### 2. Create .env
-copy .env.example
-rename to .env
-change values to your liking
 
-### 3. Start app
+Copy `.env.example` to `.env` and adjust the values if needed.
 
+### 3. Start the app
+
+```sh
 docker compose up --build -d
-
-### 4. View app
-
-localhost:8080  
-
-happi
-
-## Frontend files
-
-The editable frontend is in the repository-root `frontend/` directory. Docker Compose mounts it into the backend container, and Spring serves it at `http://localhost:8080`. Frontend file edits are picked up without rebuilding the image; rebuild after backend changes with `docker compose up --build -d`.
-
-Use the same frontend with mock data without Docker or a backend:
-
-```powershell
-cd frontend
-python -m http.server 5500
 ```
 
-Open `http://localhost:5500/?api=mock`. The choice is saved in this browser, and sample account, balance, game, and transaction data are stored in local storage. To switch back to the real backend, open `http://localhost:8080/?api=live` while Compose is running. These mode links also work when the frontend is served by Spring.
+### 4. Open the app
 
-When running Spring Boot from IntelliJ, set the working directory to `kasynobackend`; Spring will resolve the default `../frontend/` location from there.
+Open `http://localhost:8080`. Nginx serves the React frontend and forwards `/api` requests to Spring. The backend API is also available at `http://localhost:8081` for local frontend development.
+
+## Frontend development
+
+The React app lives in the repository-root `frontend/` directory. From that directory run:
+
+```sh
+npm install
+npm run dev
+```
+
+Vite opens at `http://localhost:5173` and proxies API requests to the Compose backend on port `8081`. Override the target with `VITE_DEV_API_TARGET` if the backend is running elsewhere. For UI work without Docker or a backend, open `http://localhost:5173/?api=mock`; mock account, balance, history, and Blackjack data are saved in browser local storage. Use `?api=live` to switch back to the backend.
+
+## Project structure
+
+- `frontend/src/` — React app, routes, shared components, and API client
+- `frontend/css/` — shared and page-specific styles
+- `kasynobackend/` — Spring API and PostgreSQL integration
+- `docker-compose.yml` — PostgreSQL, Spring API, and Nginx frontend services

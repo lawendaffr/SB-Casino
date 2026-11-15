@@ -173,7 +173,7 @@ export async function apiRequest(path, options = {}) {
         result = demoState.transactions.map(transaction => ({ ...transaction }));
     } else if (path === "/api/users/me/stats") {
         const completed = demoState.games.filter(game => game.status === "COMPLETED");
-        const wins = completed.filter(game => game.result === "PLAYER_WIN").length;
+        const wins = completed.filter(game => game.result === "PLAYER_WIN" || game.result === "PLAYER_BLACKJACK").length;
         const pushes = completed.filter(game => game.result === "PUSH").length;
         result = {
             gamesPlayed: completed.length,

@@ -95,6 +95,7 @@ body {
 .side-menu-links { display: grid; gap: .35rem; padding: 1.4rem 0; }
 .side-menu-links a { display: flex; align-items: center; justify-content: space-between; padding: .85rem .9rem; border-radius: 8px; color: var(--text-secondary); font-size: .84rem; font-weight: 600; text-decoration: none; transition: color 150ms ease, background-color 150ms ease; }
 .side-menu-links a:hover { background: var(--bg-subtle); color: var(--text-primary); }
+.side-menu-links a.active { background: var(--bg-muted); color: var(--text-primary); }
 .side-menu-links a span { color: var(--accent); }
 body.page-games #games-link,
 body.page-dashboard #dashboard-link,

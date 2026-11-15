@@ -1,9 +1,4 @@
 spring:
-  web:
-    resources:
-      static-locations:
-        - ${FRONTEND_LOCATION:file:../frontend/}
-        - classpath:/static/
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:5432/${POSTGRES_DB:casino}
     username: ${POSTGRES_USER:casino}

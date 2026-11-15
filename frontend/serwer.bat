@@ -1,2 +1,3 @@
 @echo off
-start "Frontend Server" cmd /k "python -m http.server 5500"
+cd /d "%~dp0"
+npm run dev
