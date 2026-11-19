@@ -155,7 +155,8 @@ public class UserController {
         return new UserResponse(
                 user.getId(),
                 user.getUsername(),
-                user.getBalance()
+                user.getBalance(),
+                user.getRole()
         );
     }
 

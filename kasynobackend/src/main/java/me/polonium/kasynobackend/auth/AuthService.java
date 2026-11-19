@@ -71,7 +71,8 @@ public class AuthService {
         return new UserResponse(
                 savedUser.getId(),
                 savedUser.getUsername(),
-                savedUser.getBalance()
+                savedUser.getBalance(),
+                savedUser.getRole()
         );
     }
     public AuthResponse login(LoginRequest request) {
