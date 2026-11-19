@@ -41,6 +41,13 @@ export default function DashboardPage() {
     loadStats();
   }, []);
 
+  useEffect(() => {
+    if (balance != null) {
+      loadTransactions();
+      loadStats();
+    }
+  }, [balance, loadTransactions, loadStats]);
+
   async function reloadBalance() {
     setMessage("");
     try { await refreshBalance(); }
