@@ -6,6 +6,8 @@ if (["live", "mock"].includes(queryMode)) {
   if (savedMode && savedMode !== queryMode) {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
   }
   localStorage.setItem(MODE_KEY, queryMode);
 }
@@ -16,13 +18,79 @@ export const apiReady = mockAdapterPromise
   ? mockAdapterPromise.then((adapter) => adapter.initialize())
   : Promise.resolve();
 
+const syncChannel = typeof BroadcastChannel !== "undefined" ? new BroadcastChannel("sb_casino_sync") : null;
+
+export function notifyDataSync(detail = {}) {
+  const payload = { ...detail, timestamp: Date.now() };
+  try {
+    syncChannel?.postMessage(payload);
+  } catch {
+    // Ignore BroadcastChannel errors
+  }
+  window.dispatchEvent(new CustomEvent("casino:data-sync", { detail: payload }));
+}
+
+if (syncChannel) {
+  syncChannel.addEventListener("message", (event) => {
+    window.dispatchEvent(new CustomEvent("casino:data-sync", { detail: event.data || {} }));
+  });
+}
+
+// Per-tab session isolation: each tab keeps its own sessionStorage tokens once initialized,
+// so a player tab and an admin tab can run side-by-side in the same browser without overwriting each other.
+function ensureTabSessionInitialized() {
+  if (sessionStorage.getItem("sbTabSessionInit")) return;
+  sessionStorage.setItem("sbTabSessionInit", "1");
+  const localAccess = localStorage.getItem("accessToken");
+  const localRefresh = localStorage.getItem("refreshToken");
+  if (localAccess && !sessionStorage.getItem("accessToken")) {
+    sessionStorage.setItem("accessToken", localAccess);
+  }
+  if (localRefresh && !sessionStorage.getItem("refreshToken")) {
+    sessionStorage.setItem("refreshToken", localRefresh);
+  }
+}
+
+export function getAccessToken() {
+  ensureTabSessionInitialized();
+  return sessionStorage.getItem("accessToken");
+}
+
+export function getRefreshToken() {
+  ensureTabSessionInitialized();
+  return sessionStorage.getItem("refreshToken");
+}
+
+export function setAuthTokens(accessToken, refreshToken) {
+  sessionStorage.setItem("sbTabSessionInit", "1");
+  if (accessToken) {
+    sessionStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("accessToken", accessToken);
+  }
+  if (refreshToken) {
+    sessionStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem("refreshToken", refreshToken);
+  }
+}
+
+export function clearAuthTokens() {
+  const currentAccess = sessionStorage.getItem("accessToken");
+  sessionStorage.setItem("sbTabSessionInit", "1");
+  sessionStorage.removeItem("accessToken");
+  sessionStorage.removeItem("refreshToken");
+  if (!currentAccess || localStorage.getItem("accessToken") === currentAccess) {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+  }
+}
+
 let refreshPromise;
 
 async function refreshAccessToken() {
   if (refreshPromise) return refreshPromise;
 
   refreshPromise = (async () => {
-    const refreshToken = localStorage.getItem("refreshToken");
+    const refreshToken = getRefreshToken();
     if (!refreshToken) throw new Error("No refresh token available");
 
     const response = await fetch("/api/auth/refresh", {
@@ -33,8 +101,7 @@ async function refreshAccessToken() {
     if (!response.ok) throw new Error("Session expired");
 
     const tokens = await response.json();
-    localStorage.setItem("accessToken", tokens.accessToken);
-    localStorage.setItem("refreshToken", tokens.refreshToken);
+    setAuthTokens(tokens.accessToken, tokens.refreshToken);
     return tokens.accessToken;
   })();
 
@@ -57,14 +124,20 @@ async function readResponse(response) {
 }
 
 export async function apiRequest(path, options = {}, retry = true) {
+  const method = (options.method || "GET").toUpperCase();
+
   if (API_MODE === "mock") {
     const adapter = await mockAdapterPromise;
-    return adapter.apiRequest(path, options);
+    const res = await adapter.apiRequest(path, options);
+    if (method !== "GET" && !path.startsWith("/api/auth/refresh")) {
+      notifyDataSync({ path, method });
+    }
+    return res;
   }
 
   const headers = { ...options.headers };
   if (options.body && !headers["Content-Type"]) headers["Content-Type"] = "application/json";
-  const token = localStorage.getItem("accessToken");
+  const token = getAccessToken();
   if (token) headers.Authorization = `Bearer ${token}`;
 
   let response = await fetch(path, { ...options, headers });
@@ -73,8 +146,7 @@ export async function apiRequest(path, options = {}, retry = true) {
       headers.Authorization = `Bearer ${await refreshAccessToken()}`;
       response = await fetch(path, { ...options, headers });
     } catch {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
+      clearAuthTokens();
       window.dispatchEvent(new Event("casino:auth-expired"));
       throw new Error("Your session expired. Please log in again.");
     }
@@ -89,6 +161,10 @@ export async function apiRequest(path, options = {}, retry = true) {
     );
     error.status = response.status;
     throw error;
+  }
+
+  if (method !== "GET" && !path.startsWith("/api/auth/refresh")) {
+    notifyDataSync({ path, method });
   }
   return data;
 }
