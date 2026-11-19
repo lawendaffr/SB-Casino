@@ -101,8 +101,27 @@ public class DepositCodeService {
             );
         }
 
+        String codeValue;
+        if (request.code() != null && !request.code().isBlank()) {
+            codeValue = request.code().trim().toUpperCase(Locale.ROOT);
+            if (codeValue.length() < 3 || codeValue.length() > 32 || !codeValue.matches("[A-Z0-9_-]+")) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Custom code must be 3-32 letters, numbers, hyphens, or underscores"
+                );
+            }
+            if (codeRepository.existsByCode(codeValue)) {
+                throw new ResponseStatusException(
+                        HttpStatus.CONFLICT,
+                        "Deposit code already exists"
+                );
+            }
+        } else {
+            codeValue = generateUniqueCode();
+        }
+
         DepositCode code = new DepositCode();
-        code.setCode(generateUniqueCode());
+        code.setCode(codeValue);
         code.setAmount(amount);
         code.setRedemptionPolicy(policy);
         code.setMaxUses(maxUses);
@@ -222,6 +241,7 @@ public class DepositCodeService {
     }
 
     private DepositCodeResponse toResponse(DepositCode code) {
+        long usedCount = code.getId() == null ? 0L : redemptionRepository.countByDepositCode_Id(code.getId());
         return new DepositCodeResponse(
                 code.getCode(),
                 code.getAmount(),
@@ -229,7 +249,8 @@ public class DepositCodeService {
                 code.getMaxUses(),
                 code.getExpiresAt(),
                 code.isActive(),
-                code.getCreatedAt()
+                code.getCreatedAt(),
+                usedCount
         );
     }
 

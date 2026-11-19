@@ -8,6 +8,15 @@ public record CreateDepositCodeRequest(
         long amount,
         RedemptionPolicy redemptionPolicy,
         Long maxUses,
-        LocalDateTime expiresAt
+        LocalDateTime expiresAt,
+        String code
 ) {
+    public CreateDepositCodeRequest(
+            long amount,
+            RedemptionPolicy redemptionPolicy,
+            Long maxUses,
+            LocalDateTime expiresAt
+    ) {
+        this(amount, redemptionPolicy, maxUses, expiresAt, null);
+    }
 }

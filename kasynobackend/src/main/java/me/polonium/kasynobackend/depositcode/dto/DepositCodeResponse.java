@@ -10,6 +10,18 @@ public record DepositCodeResponse(
         Long maxUses,
         LocalDateTime expiresAt,
         boolean active,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        long usedCount
 ) {
+    public DepositCodeResponse(
+            String code,
+            long amount,
+            RedemptionPolicy redemptionPolicy,
+            Long maxUses,
+            LocalDateTime expiresAt,
+            boolean active,
+            LocalDateTime createdAt
+    ) {
+        this(code, amount, redemptionPolicy, maxUses, expiresAt, active, createdAt, 0L);
+    }
 }
