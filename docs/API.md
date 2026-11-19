@@ -273,7 +273,8 @@ Authorization: Bearer <access-token>
 {
   "id": 12,
   "username": "player1",
-  "balance": 1000
+  "balance": 1000,
+  "role": "USER"
 }
 ```
 
@@ -464,9 +465,11 @@ Enforcement endpoints are `POST /api/moderation/users/{userId}/warn`, `/timeout`
 
 These endpoints require the `ADMIN` role:
 
-* `GET /api/admin/users?page=0&size=20` lists users without exposing password hashes.
+* `GET /api/admin/users?page=0&size=20&q=name` lists and searches users without exposing password hashes.
+* `POST /api/admin/users` creates a new user or admin account directly (`{"username": "admin2", "password": "password123", "email": "admin2@sbcasino.local", "role": "ADMIN", "balance": 1000}`).
 * `PATCH /api/admin/users/{userId}/balance` adjusts a balance. Send a signed non-zero `amount` and optional reason, for example `{"amount": 250, "reason": "Support correction"}`. Negative adjustments cannot reduce a balance below zero.
 * `PATCH /api/admin/users/{userId}/role` changes a role, for example `{"role": "MODERATOR"}`.
+* `PATCH /api/admin/users/{userId}/password` changes a user's password (`{"newPassword": "newpassword123"}`) and revokes their refresh tokens.
 * `GET /api/admin/logs?page=0&size=20` lists audited staff actions.
 * Deposit and credit codes are managed at `/api/admin/codes` (details below).
 * `GET /api/admin/games` lists configured games. `PATCH /api/admin/games/{gameType}` updates availability and maximum bet, for example `{"enabled":false,"maxBet":100000}`. The current Blackjack maximum is capped at 1,000,000 credits.

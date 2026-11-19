@@ -6,9 +6,10 @@ import me.polonium.kasynobackend.entity.AccountStatus;
 import java.time.LocalDateTime;
 
 public record AdminUserResponse(Long id, String username, long balance, UserRole role,
-                                AccountStatus accountStatus, LocalDateTime suspendedUntil) {
+                                AccountStatus accountStatus, LocalDateTime suspendedUntil,
+                                String email) {
     public static AdminUserResponse from(User user) {
         return new AdminUserResponse(user.getId(), user.getUsername(), user.getBalance(), user.getRole(),
-                user.getAccountStatus(), user.getSuspendedUntil());
+                user.getAccountStatus(), user.getSuspendedUntil(), user.getEmail());
     }
 }
