@@ -3,6 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import { GamesPage, HomePage } from "./games.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
 import BlackjackPage from "./pages/BlackjackPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import DepositPage from "./pages/DepositPage.jsx";
@@ -20,7 +21,8 @@ function RouteShell() {
       "/dashboard": "page-dashboard",
       "/blackjack": "page-blackjack",
       "/history": "page-history",
-      "/deposit": "page-deposit"
+      "/deposit": "page-deposit",
+      "/admin": "page-admin"
     };
     document.body.className = pageClasses[pathname] || "page-not-found";
     document.title = `${pathname === "/" ? "Home" : pathname.slice(1).replace(/^./, (letter) => letter.toUpperCase())} - SB-Casino`;
@@ -42,6 +44,7 @@ function RouteShell() {
       <Route path="/blackjack" element={<BlackjackPage />} />
       <Route path="/history" element={<HistoryPage />} />
       <Route path="/deposit" element={<DepositPage />} />
+      <Route path="/admin" element={<AdminPage />} />
       <Route path="*" element={<main className="page-main"><h1>Page not found</h1></main>} />
     </Routes>
   </>;

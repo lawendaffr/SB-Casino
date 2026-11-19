@@ -11,6 +11,7 @@ import "../css/dashboard.css";
 import "../css/blackjack.css";
 import "../css/history.css";
 import "../css/deposit.css";
+import "../css/admin.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
