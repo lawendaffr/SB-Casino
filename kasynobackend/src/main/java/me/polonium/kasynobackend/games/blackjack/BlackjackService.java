@@ -8,8 +8,11 @@ import me.polonium.kasynobackend.games.GameOperations;
 import me.polonium.kasynobackend.entity.User;
 import me.polonium.kasynobackend.games.blackjack.dto.BlackjackAction;
 import me.polonium.kasynobackend.games.blackjack.dto.BlackjackGameResponse;
+import me.polonium.kasynobackend.games.blackjack.dto.SpectatedBlackjackGameResponse;
+import me.polonium.kasynobackend.games.blackjack.dto.SpectatedGamesOverviewResponse;
 import me.polonium.kasynobackend.repository.BlackjackGameRepository;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -292,6 +295,74 @@ public class BlackjackService {
                 game.getPayout(),
                 game.getResult(),
                 balanceService.getBalance(userId)
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public SpectatedGamesOverviewResponse listSpectatedGames(int recentLimit) {
+        int safeRecent = Math.min(50, Math.max(1, recentLimit));
+        List<SpectatedBlackjackGameResponse> active = gameRepository
+                .findByStatusWithUser(BlackjackStatus.ACTIVE, PageRequest.of(0, 50))
+                .stream()
+                .map(this::toSpectatedResponse)
+                .toList();
+        List<SpectatedBlackjackGameResponse> recent = gameRepository
+                .findByStatusWithUser(BlackjackStatus.FINISHED, PageRequest.of(0, safeRecent))
+                .stream()
+                .map(this::toSpectatedResponse)
+                .toList();
+        return new SpectatedGamesOverviewResponse(active, recent);
+    }
+
+    @Transactional(readOnly = true)
+    public SpectatedBlackjackGameResponse getSpectatedGame(Long gameId) {
+        BlackjackGame game = gameRepository.findByIdWithUser(gameId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Game not found"));
+        return toSpectatedResponse(game);
+    }
+
+    @Transactional(readOnly = true)
+    public SpectatedBlackjackGameResponse getSpectatedUserGame(Long userId) {
+        List<BlackjackGame> found = gameRepository.findLatestByUserIdWithUser(userId, PageRequest.of(0, 1));
+        if (found.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Blackjack games found for this user");
+        }
+        return toSpectatedResponse(found.get(0));
+    }
+
+    private SpectatedBlackjackGameResponse toSpectatedResponse(BlackjackGame game) {
+        List<String> playerCards = decode(game.getPlayerCards());
+        List<String> dealerCards = decode(game.getDealerCards());
+        List<String> deck = decode(game.getRemainingDeck());
+        boolean active = game.getStatus() == BlackjackStatus.ACTIVE;
+
+        List<String> visibleDealerCards = active && !dealerCards.isEmpty()
+                ? List.of(dealerCards.get(0))
+                : dealerCards;
+        Integer visibleDealerTotal = active && !dealerCards.isEmpty()
+                ? handTotal(visibleDealerCards)
+                : handTotal(dealerCards);
+
+        User player = game.getUser();
+        return new SpectatedBlackjackGameResponse(
+                game.getId(),
+                "BLACKJACK",
+                player.getId(),
+                player.getUsername(),
+                player.getBalance(),
+                game.getStatus().name(),
+                playerCards,
+                handTotal(playerCards),
+                visibleDealerCards,
+                dealerCards,
+                visibleDealerTotal,
+                handTotal(dealerCards),
+                deck.size(),
+                game.getBet(),
+                game.getPayout(),
+                game.getResult(),
+                game.getCreatedAt(),
+                game.getFinishedAt()
         );
     }
 }
